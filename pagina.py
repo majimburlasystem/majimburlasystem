@@ -648,8 +648,9 @@ class H(BaseHTTPRequestHandler):
         set_order_status(order_id, 'pending', sess.get('id'))
         return self.j({'ok':True, 'order_id':order_id, 'checkout_url':sess.get('url')})
       except Exception as e:
-        print('STRIPE_CREATE_ERR:', repr(e), flush=True)
-        return self.j({'ok':False,'message':'Falha ao iniciar pagamento'},500)
+        err_txt = str(e).strip() or repr(e)
+        print('STRIPE_CREATE_ERR:', err_txt, flush=True)
+        return self.j({'ok':False,'message':f'Falha ao iniciar pagamento: {err_txt[:240]}'},400)
     if path=='/api/phone/send':
       ph=(d.get('phone') or '').strip()
       if len(ph)<8: return self.j({'ok':False,'message':'Celular invalido'},400)
