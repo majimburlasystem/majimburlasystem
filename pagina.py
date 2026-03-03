@@ -515,7 +515,7 @@ class H(BaseHTTPRequestHandler):
       if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
       return self.j(user_profile(em))
     if path=='/api/version':
-      return self.j({'version':'2026-03-03-v3'})
+      return self.j({'version':'2026-03-03-v4'})
     if path=='/api/payments/health':
       base = app_base_url()
       return self.j({
