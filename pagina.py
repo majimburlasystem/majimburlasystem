@@ -495,6 +495,17 @@ class H(BaseHTTPRequestHandler):
       return self.j(user_profile(em))
     if path=='/api/version':
       return self.j({'version':'2026-03-03-v3'})
+    if path=='/api/payments/health':
+      base = app_base_url()
+      return self.j({
+        'ok': stripe_ready(),
+        'provider': 'stripe',
+        'public_base_url': base,
+        'webhook_url': f'{base}/api/payments/stripe/webhook',
+        'stripe_python_installed': bool(stripe is not None),
+        'stripe_secret_key_set': bool(STRIPE_SECRET_KEY),
+        'stripe_webhook_secret_set': bool(STRIPE_WEBHOOK_SECRET),
+      })
     if path=='/api/order/status':
       em = me(self.headers)
       if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
