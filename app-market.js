@@ -1,12 +1,12 @@
-﻿const products = [
-  { id:'1778004652', name:'Comando Ultra', price:999999999, image:'/static/roblox/thumb/asset/1778004652', meta:'Item raro' },
-  { id:'48039287', name:'Fedora Sao Patricio', price:66999, image:'/static/roblox/thumb/asset/48039287', meta:'Item raro' },
-  { id:'99641902', name:'NINJABART122', price:34999999, image:'/static/roblox/thumb/asset/99641902', meta:'Item raro' },
-  { id:'17402911590', name:'Dragon Fruit', price:120, image:'/static/roblox/thumb/asset/17402911590', meta:'Dragon' },
-  { id:'18915829198', name:'SHADOW DRAGON', price:500, image:'/static/roblox/thumb/asset/18915829198', meta:'Dragon' },
-  { id:'16613992677', name:'BEST DRAGON', price:359, image:'/static/roblox/thumb/asset/16613992677', meta:'Dragon' },
-  { id:'12357436568', name:'FROST DRAGON', price:500, image:'/static/roblox/thumb/asset/12357436568', meta:'Dragon' },
-  { id:'blox-fruit-accounts', name:'CONTAS BLOX FRUIT', price:10, image:'/static/roblox/thumb/asset/2753915549', meta:'Clique em Comprar para ver as contas internas', type:'accounts' }
+const products = [
+  { id:'1778004652', name:'Comando Ultra', price:999999999, image:'/imagens/1778004652.png', meta:'Item raro - cotacao manual', quoteOnly:true },
+  { id:'48039287', name:'Fedora Sao Patricio', price:66999, image:'/imagens/48039287.png', meta:'Item raro' },
+  { id:'99641902', name:'NINJABART122', price:34999999, image:'/imagens/99641902.png', meta:'Item raro - cotacao manual', quoteOnly:true },
+  { id:'17402911590', name:'Dragon Fruit', price:120, image:'/imagens/17402911590.png', meta:'Dragon' },
+  { id:'18915829198', name:'SHADOW DRAGON', price:500, image:'/imagens/18915829198.png', meta:'Dragon' },
+  { id:'16613992677', name:'BEST DRAGON', price:359, image:'/imagens/16613992677.png', meta:'Dragon' },
+  { id:'12357436568', name:'FROST DRAGON', price:500, image:'/imagens/12357436568.png', meta:'Dragon' },
+  { id:'blox-fruit-accounts', name:'CONTAS BLOX FRUIT', price:10, image:'/imagens/2753915549.png', meta:'Clique em Comprar para ver as contas internas', type:'accounts' }
 ];
 
 const accountUsers = [1,2,3,4,5,6,7,8,9,10,11,12,261,393,496,781,934,1024,1560,2048,2456,3001,4096,5000,7777,9001,10000,11111,12345,15555];
@@ -105,13 +105,24 @@ function walkAvatarAcrossSite(){
 function renderProducts(){
   const grid = $('#itemGrid');
   if(!grid) return;
-  grid.innerHTML = products.map((p)=>`<article class="card" data-id="${p.id}" data-price="${p.price}" data-item="${p.name}"><img class="item-image" src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='/imagens/${p.id}.png';"><div class="item-body"><h3 class="item-name">${p.name}</h3><div class="item-meta">${p.meta}</div><div class="price-row"><div class="price">${fmt(p.price)}</div><button class="buy">${p.type==='accounts'?'Comprar':'Comprar'}</button></div></div></article>`).join('');
+  grid.innerHTML = products.map((p)=>`<article class="card" data-id="${p.id}" data-price="${p.price}" data-item="${p.name}"><img class="item-image" src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='/static/roblox/thumb/asset/${p.id==='blox-fruit-accounts'?'2753915549':p.id}';"><div class="item-body"><h3 class="item-name">${p.name}</h3><div class="item-meta">${p.meta}</div><div class="price-row"><div class="price">${fmt(p.price)}</div><button class="buy">${p.quoteOnly?'Cotar':'Comprar'}</button></div></div></article>`).join('');
   document.querySelectorAll('#itemGrid .buy').forEach((btn)=>{
     btn.onclick = (e)=>{
       const card = e.target.closest('.card');
       const id = card.dataset.id;
       const p = products.find((x)=>x.id===id);
       if(p.type==='accounts'){ openOverlay('#accounts'); return; }
+      if(p.quoteOnly){
+        const toast = $('#toast');
+        if(toast){
+          toast.textContent = 'Item ultra caro: cotacao manual iniciada.';
+          toast.classList.add('show');
+          setTimeout(()=>toast.classList.remove('show'), 1800);
+        }
+        const txt = `Oi, quero cotacao manual do item ${p.name} (${fmt(p.price)}).`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
+        return;
+      }
       addToCart(p.id,p.name,p.price);
     };
   });

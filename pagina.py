@@ -160,9 +160,9 @@ ACCOUNT_USERS = [1,2,3,4,5,6,7,8,9,10,11,12,261,393,496,781,934,1024,1560,2048,2
 
 def catalog_map():
   out = {
-    '1778004652': {'name':'Comando Ultra', 'price':999999999},
+    '1778004652': {'name':'Comando Ultra', 'price':999999999, 'quote_only':True},
     '48039287': {'name':'Fedora Sao Patricio', 'price':66999},
-    '99641902': {'name':'NINJABART122', 'price':34999999},
+    '99641902': {'name':'NINJABART122', 'price':34999999, 'quote_only':True},
     '17402911590': {'name':'Dragon Fruit', 'price':120},
     '18915829198': {'name':'SHADOW DRAGON', 'price':500},
     '16613992677': {'name':'BEST DRAGON', 'price':359},
@@ -522,6 +522,8 @@ class H(BaseHTTPRequestHandler):
         entry = catalog.get(iid)
         if not entry:
           continue
+        if entry.get('quote_only'):
+          return self.j({'ok':False,'message':f"Item '{entry['name']}' e de cotacao manual e nao pode ir para checkout automatico."},400)
         unit = int(entry['price'])
         safe_items.append({'id':iid, 'name':entry['name'], 'unit_price':unit, 'qty':qty})
         total += unit * qty
