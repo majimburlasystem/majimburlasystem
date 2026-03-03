@@ -7,6 +7,7 @@ import secrets
 import sqlite3
 import subprocess
 import time
+import urllib.error
 import urllib.request
 from http import cookies
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -36,6 +37,11 @@ DB_INTEGRITY_ERROR = psycopg.IntegrityError if (USE_POSTGRES and psycopg is not 
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '').strip()
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '').strip()
 STRIPE_MAX_UNIT_AMOUNT = 99_999_999  # centavos
+ROBLOX_JSON_CACHE_TTL = 90
+ROBLOX_JSON_CACHE = {}
+ROBLOX_JSON_NEG_TTL = 8
+ROBLOX_THUMB_BLOCK_SECONDS = 20
+ROBLOX_THUMB_BLOCK_UNTIL = 0.0
 
 SESSIONS, CAPTCHAS, OTPS, STATES = {}, {}, {}, {}
 SESSION_TTL, CAPTCHA_TTL, OTP_TTL, STATE_TTL = 28800, 180, 300, 300
@@ -177,6 +183,14 @@ def asset_local_fallback(asset_id):
   p = BASE / 'imagens' / f'{asset_id}.png'
   return p if p.exists() else None
 
+def default_thumb_fallback():
+  # Usa imagens locais ja presentes no projeto como placeholder universal.
+  for name in ('15505417413.png', '48039287.png', '17402911590.png'):
+    p = BASE / 'imagens' / name
+    if p.exists():
+      return p
+  return None
+
 def norm_gender(v):
   x = str(v or '').strip().lower()
   return 'feminino' if x == 'feminino' else 'masculino'
@@ -284,8 +298,52 @@ def oauth_start(p):
   return c['auth']+'?'+urlencode(q),None
 
 def json_get(url, headers=None):
+  global ROBLOX_THUMB_BLOCK_UNTIL
+  now = time.time()
+  is_thumb_api = 'thumbnails.roblox.com/' in url
+  if is_thumb_api and now < ROBLOX_THUMB_BLOCK_UNTIL:
+    return {}
+  cached = ROBLOX_JSON_CACHE.get(url)
+  if cached and cached[1] > now:
+    return cached[0]
   req=urllib.request.Request(url,headers=headers or {'Accept':'application/json','User-Agent':'Mozilla/5.0'})
-  with urllib.request.urlopen(req,timeout=20) as r: return json.loads(r.read().decode())
+  backoff = 0.35
+  for attempt in range(4):
+    try:
+      with urllib.request.urlopen(req,timeout=20) as r:
+        data = json.loads(r.read().decode())
+        ROBLOX_JSON_CACHE[url] = (data, time.time() + ROBLOX_JSON_CACHE_TTL)
+        return data
+    except urllib.error.HTTPError as e:
+      retry_after = 0.0
+      try:
+        ra = (e.headers or {}).get('Retry-After')
+        retry_after = float(ra) if ra is not None else 0.0
+      except Exception:
+        retry_after = 0.0
+      if e.code == 429 and is_thumb_api:
+        block_for = max(ROBLOX_THUMB_BLOCK_SECONDS, min(retry_after, 60.0))
+        ROBLOX_THUMB_BLOCK_UNTIL = max(ROBLOX_THUMB_BLOCK_UNTIL, time.time() + block_for)
+      should_retry = (e.code == 429 or 500 <= int(e.code) <= 599) and attempt < 3
+      if should_retry:
+        time.sleep(max(backoff, min(retry_after, 5.0)))
+        backoff = min(backoff * 2.0, 2.5)
+        continue
+      print('JSON_GET_HTTP_ERR:', e.code, url, flush=True)
+      ROBLOX_JSON_CACHE[url] = ({}, time.time() + ROBLOX_JSON_NEG_TTL)
+      return {}
+    except Exception as e:
+      print('JSON_GET_ERR:', repr(e), url, flush=True)
+      ROBLOX_JSON_CACHE[url] = ({}, time.time() + ROBLOX_JSON_NEG_TTL)
+      return {}
+  return {}
+
+def thumb_json_get(url):
+  try:
+    return json_get(url)
+  except Exception as e:
+    print('THUMB_JSON_GET_ERR:', repr(e), url, flush=True)
+    return {}
 
 def oauth_token(p,code):
   c=oauth_client(p)
@@ -361,10 +419,11 @@ class H(BaseHTTPRequestHandler):
     try:
       req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0','Accept':'image/*,*/*'})
       with urllib.request.urlopen(req,timeout=20) as r: d=r.read(); c=r.headers.get('Content-Type','image/png')
-      self.send_response(200); self.send_header('Content-Type',c); self.send_header('Content-Length',str(len(d))); self.end_headers(); self.wfile.write(d)
+      self.send_response(200); self.send_header('Content-Type',c); self.send_header('Content-Length',str(len(d))); self.send_header('Cache-Control','public, max-age=300'); self.end_headers(); self.wfile.write(d)
+      return True
     except Exception as e:
       print('IMG_PROXY_ERR:', url, repr(e), flush=True)
-      self.send_error(404)
+      return False
   def file_out(self, p):
     fp = Path(p)
     if not fp.exists() or not fp.is_file():
@@ -390,34 +449,42 @@ class H(BaseHTTPRequestHandler):
       uid=path.rsplit('/',1)[-1]
       u = None
       try:
-        d=json_get('https://thumbnails.roblox.com/v1/users/avatar-bust?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
+        d=thumb_json_get('https://thumbnails.roblox.com/v1/users/avatar-bust?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
         u=(d.get('data') or [{}])[0].get('imageUrl')
       except Exception:
         u = None
       if not u:
-        d=json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
+        d=thumb_json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
         u=(d.get('data') or [{}])[0].get('imageUrl')
-      if not u: self.send_error(404); return
-      return self.img_proxy(u)
+      if u and self.img_proxy(u):
+        return
+      fb = default_thumb_fallback()
+      if fb:
+        return self.file_out(fb)
+      self.send_error(404); return
     if path.startswith('/static/roblox/thumb/asset/'):
       aid=path.rsplit('/',1)[-1]
       try:
-        d=json_get('https://thumbnails.roblox.com/v1/assets?'+urlencode({'assetIds':aid,'returnPolicy':'PlaceHolder','size':'420x420','format':'Png','isCircular':'false'}))
+        d=thumb_json_get('https://thumbnails.roblox.com/v1/assets?'+urlencode({'assetIds':aid,'returnPolicy':'PlaceHolder','size':'420x420','format':'Png','isCircular':'false'}))
         u=(d.get('data') or [{}])[0].get('imageUrl')
       except Exception:
         u = None
-      if u:
-        return self.img_proxy(u)
-      fb = asset_local_fallback(aid)
+      if u and self.img_proxy(u):
+        return
+      fb = asset_local_fallback(aid) or default_thumb_fallback()
       if fb:
         return self.file_out(fb)
       self.send_error(404); return
     if path.startswith('/static/roblox/thumb/user/'):
       uid=path.rsplit('/',1)[-1]
-      d=json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
+      d=thumb_json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
       u=(d.get('data') or [{}])[0].get('imageUrl')
-      if not u: self.send_error(404); return
-      return self.img_proxy(u)
+      if u and self.img_proxy(u):
+        return
+      fb = default_thumb_fallback()
+      if fb:
+        return self.file_out(fb)
+      self.send_error(404); return
     if path=='/api/captcha':
       cid,q=captcha(); return self.j({'captcha_id':cid,'question':q})
     if path=='/api/oauth/providers':
@@ -426,6 +493,8 @@ class H(BaseHTTPRequestHandler):
       em = me(self.headers)
       if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
       return self.j(user_profile(em))
+    if path=='/api/version':
+      return self.j({'version':'2026-03-03-v3'})
     if path=='/api/order/status':
       em = me(self.headers)
       if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
