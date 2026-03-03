@@ -105,7 +105,7 @@ function walkAvatarAcrossSite(){
 function renderProducts(){
   const grid = $('#itemGrid');
   if(!grid) return;
-  grid.innerHTML = products.map((p)=>`<article class="card" data-id="${p.id}" data-price="${p.price}" data-item="${p.name}"><img class="item-image" src="${p.image}" alt="${p.name}"><div class="item-body"><h3 class="item-name">${p.name}</h3><div class="item-meta">${p.meta}</div><div class="price-row"><div class="price">${fmt(p.price)}</div><button class="buy">${p.type==='accounts'?'Comprar':'Comprar'}</button></div></div></article>`).join('');
+  grid.innerHTML = products.map((p)=>`<article class="card" data-id="${p.id}" data-price="${p.price}" data-item="${p.name}"><img class="item-image" src="${p.image}" alt="${p.name}" onerror="this.onerror=null;this.src='/imagens/${p.id}.png';"><div class="item-body"><h3 class="item-name">${p.name}</h3><div class="item-meta">${p.meta}</div><div class="price-row"><div class="price">${fmt(p.price)}</div><button class="buy">${p.type==='accounts'?'Comprar':'Comprar'}</button></div></div></article>`).join('');
   document.querySelectorAll('#itemGrid .buy').forEach((btn)=>{
     btn.onclick = (e)=>{
       const card = e.target.closest('.card');
@@ -120,7 +120,7 @@ function renderProducts(){
 function renderAccountOptions(){
   const list = $('#accountsList');
   if(!list) return;
-  list.innerHTML = accountOptions.map((a)=>`<div class="acc-item"><img src="${a.image}" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px"><div><b>${a.name}</b><div>${a.meta}</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;"><span>${fmt(a.price)}</span><button class="buy" data-aid="${a.id}">Adicionar</button></div></div></div>`).join('');
+  list.innerHTML = accountOptions.map((a)=>`<div class="acc-item"><img src="${a.image}" onerror="this.onerror=null;this.src='/static/roblox/thumb/avatar/1';" style="width:100%;max-height:150px;object-fit:cover;border-radius:8px"><div><b>${a.name}</b><div>${a.meta}</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;"><span>${fmt(a.price)}</span><button class="buy" data-aid="${a.id}">Adicionar</button></div></div></div>`).join('');
   list.querySelectorAll('[data-aid]').forEach((btn)=>{
     btn.onclick = ()=>{
       const a = accountOptions.find((x)=>x.id===btn.dataset.aid);

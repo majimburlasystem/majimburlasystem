@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import json
+import mimetypes
 import os
 import secrets
 import sqlite3
@@ -34,6 +35,7 @@ USE_POSTGRES = bool(DATABASE_URL)
 DB_INTEGRITY_ERROR = psycopg.IntegrityError if (USE_POSTGRES and psycopg is not None) else sqlite3.IntegrityError
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '').strip()
 STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '').strip()
+STRIPE_MAX_UNIT_AMOUNT = 99_999_999  # centavos
 
 SESSIONS, CAPTCHAS, OTPS, STATES = {}, {}, {}, {}
 SESSION_TTL, CAPTCHA_TTL, OTP_TTL, STATE_TTL = 28800, 180, 300, 300
@@ -170,6 +172,10 @@ def catalog_map():
   for i, uid in enumerate(ACCOUNT_USERS):
     out[f'bf-{uid}'] = {'name':f'Conta Max Blox Fruits #{i+1}', 'price':10+((i%4)*2)}
   return out
+
+def asset_local_fallback(asset_id):
+  p = BASE / 'imagens' / f'{asset_id}.png'
+  return p if p.exists() else None
 
 def norm_gender(v):
   x = str(v or '').strip().lower()
@@ -359,9 +365,27 @@ class H(BaseHTTPRequestHandler):
     except Exception as e:
       print('IMG_PROXY_ERR:', url, repr(e), flush=True)
       self.send_error(404)
+  def file_out(self, p):
+    fp = Path(p)
+    if not fp.exists() or not fp.is_file():
+      self.send_error(404)
+      return
+    data = fp.read_bytes()
+    ctype = mimetypes.guess_type(str(fp))[0] or 'application/octet-stream'
+    self.send_response(200)
+    self.send_header('Content-Type', ctype)
+    self.send_header('Content-Length', str(len(data)))
+    self.send_header('Cache-Control', 'public, max-age=3600')
+    self.end_headers()
+    self.wfile.write(data)
   def do_GET(self):
     cleanup(); p=urlparse(self.path); path=p.path; qs=parse_qs(p.query)
     if path=='/static/app-market.js': return self.h(read_file('app-market.js'))
+    if path == '/script.js':
+      return self.file_out(BASE / 'script.js')
+    if path.startswith('/imagens/'):
+      safe = path.lstrip('/').replace('..', '')
+      return self.file_out(BASE / safe)
     if path.startswith('/static/roblox/thumb/avatar/'):
       uid=path.rsplit('/',1)[-1]
       u = None
@@ -377,10 +401,17 @@ class H(BaseHTTPRequestHandler):
       return self.img_proxy(u)
     if path.startswith('/static/roblox/thumb/asset/'):
       aid=path.rsplit('/',1)[-1]
-      d=json_get('https://thumbnails.roblox.com/v1/assets?'+urlencode({'assetIds':aid,'returnPolicy':'PlaceHolder','size':'420x420','format':'Png','isCircular':'false'}))
-      u=(d.get('data') or [{}])[0].get('imageUrl')
-      if not u: self.send_error(404); return
-      return self.img_proxy(u)
+      try:
+        d=json_get('https://thumbnails.roblox.com/v1/assets?'+urlencode({'assetIds':aid,'returnPolicy':'PlaceHolder','size':'420x420','format':'Png','isCircular':'false'}))
+        u=(d.get('data') or [{}])[0].get('imageUrl')
+      except Exception:
+        u = None
+      if u:
+        return self.img_proxy(u)
+      fb = asset_local_fallback(aid)
+      if fb:
+        return self.file_out(fb)
+      self.send_error(404); return
     if path.startswith('/static/roblox/thumb/user/'):
       uid=path.rsplit('/',1)[-1]
       d=json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
@@ -500,11 +531,14 @@ class H(BaseHTTPRequestHandler):
       base = app_base_url()
       line_items = []
       for it in safe_items:
+        unit_amount = int(it['unit_price'] * 100)
+        if unit_amount > STRIPE_MAX_UNIT_AMOUNT:
+          return self.j({'ok':False,'message':f"Item '{it['name']}' excede o limite de valor do Stripe. Remova do carrinho para continuar."},400)
         line_items.append({
           'price_data': {
             'currency': 'brl',
             'product_data': {'name': it['name']},
-            'unit_amount': int(it['unit_price'] * 100),
+            'unit_amount': unit_amount,
           },
           'quantity': int(it['qty']),
         })
