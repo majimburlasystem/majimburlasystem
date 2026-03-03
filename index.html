@@ -676,7 +676,7 @@
     </section>
 
     <footer>
-      Protótipo visual de marketplace temático Roblox. Sem integração oficial com transações reais.
+      Marketplace com checkout seguro via provedor externo. Nenhum dado completo de cartao e armazenado no site.
     </footer>
   </div>
 
@@ -697,15 +697,12 @@
       <button class="tab" data-pay="pix">PIX</button>
     </div>
     <div class="pay-panel active" id="panel-card">
-      <input class="pay-input" placeholder="Nome no cartao" />
-      <input class="pay-input" placeholder="Numero do cartao" />
-      <input class="pay-input" placeholder="Validade MM/AA" />
-      <input class="pay-input" placeholder="CVV" />
+      <p class="avatar-line">Pagamento por cartao em ambiente seguro do provedor (Stripe Checkout).</p>
+      <p class="avatar-line">Os dados do cartao nao ficam salvos neste site.</p>
     </div>
     <div class="pay-panel" id="panel-pix">
-      <input class="pay-input" placeholder="Nome completo" />
-      <input class="pay-input" placeholder="CPF" />
-      <input class="pay-input" value="pix-market@robuxvault.com" readonly />
+      <p class="avatar-line">PIX tambem pode ser exibido no checkout seguro do provedor.</p>
+      <p class="avatar-line">Clique em "Pagar agora" para continuar.</p>
     </div>
     <button class="btn" id="payNow">Pagar agora</button>
   </aside>

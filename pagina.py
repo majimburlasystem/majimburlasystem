@@ -17,6 +17,11 @@ try:
 except Exception:
   psycopg = None
 
+try:
+  import stripe
+except Exception:
+  stripe = None
+
 HOST = os.getenv('HOST', '127.0.0.1').strip() or '127.0.0.1'
 PORT = int(os.getenv('PORT', os.getenv('APP_PORT', '9898')))
 ACTIVE_PORT = PORT
@@ -27,6 +32,8 @@ PUBLIC_BASE_URL = os.getenv('PUBLIC_BASE_URL', '').strip().rstrip('/')
 DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
 USE_POSTGRES = bool(DATABASE_URL)
 DB_INTEGRITY_ERROR = psycopg.IntegrityError if (USE_POSTGRES and psycopg is not None) else sqlite3.IntegrityError
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '').strip()
+STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET', '').strip()
 
 SESSIONS, CAPTCHAS, OTPS, STATES = {}, {}, {}, {}
 SESSION_TTL, CAPTCHA_TTL, OTP_TTL, STATE_TTL = 28800, 180, 300, 300
@@ -85,10 +92,84 @@ def init_db():
       if 'gender' not in cols:
         q_exec(c, "ALTER TABLE clients ADD COLUMN gender TEXT DEFAULT 'masculino'")
     q_exec(c, "UPDATE clients SET gender='masculino' WHERE gender IS NULL OR TRIM(gender)=''")
+    if USE_POSTGRES:
+      q_exec(c, """CREATE TABLE IF NOT EXISTS orders(
+        id TEXT PRIMARY KEY,
+        email TEXT NOT NULL,
+        items_json TEXT NOT NULL,
+        total_amount BIGINT NOT NULL,
+        status TEXT NOT NULL,
+        provider TEXT NOT NULL,
+        provider_ref TEXT,
+        created_at BIGINT NOT NULL,
+        updated_at BIGINT NOT NULL
+      )""")
+    else:
+      q_exec(c, """CREATE TABLE IF NOT EXISTS orders(
+        id TEXT PRIMARY KEY,
+        email TEXT NOT NULL,
+        items_json TEXT NOT NULL,
+        total_amount INTEGER NOT NULL,
+        status TEXT NOT NULL,
+        provider TEXT NOT NULL,
+        provider_ref TEXT,
+        created_at INTEGER NOT NULL,
+        updated_at INTEGER NOT NULL
+      )""")
     c.commit()
+
+def stripe_ready():
+  return bool(stripe is not None and STRIPE_SECRET_KEY)
+
+def stripe_setup():
+  if not stripe_ready():
+    return False
+  stripe.api_key = STRIPE_SECRET_KEY
+  return True
+
+def create_order(email, items, total_amount, provider='stripe'):
+  now = int(time.time())
+  oid = secrets.token_urlsafe(12)
+  payload = json.dumps(items, ensure_ascii=False)
+  with db() as c:
+    q_exec(c, "INSERT INTO orders(id,email,items_json,total_amount,status,provider,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?)", (oid, email, payload, int(total_amount), 'pending', provider, now, now))
+    c.commit()
+  return oid
+
+def set_order_status(order_id, status, provider_ref=None):
+  now = int(time.time())
+  with db() as c:
+    if provider_ref:
+      q_exec(c, "UPDATE orders SET status=?,provider_ref=?,updated_at=? WHERE id=?", (status, provider_ref, now, order_id))
+    else:
+      q_exec(c, "UPDATE orders SET status=?,updated_at=? WHERE id=?", (status, now, order_id))
+    c.commit()
+
+def order_by_id(order_id):
+  with db() as c:
+    r = q_exec(c, "SELECT id,email,total_amount,status,provider,provider_ref,created_at,updated_at FROM orders WHERE id=?", (order_id,)).fetchone()
+  if not r:
+    return None
+  return {'id':r[0], 'email':r[1], 'total_amount':int(r[2]), 'status':r[3], 'provider':r[4], 'provider_ref':r[5], 'created_at':int(r[6]), 'updated_at':int(r[7])}
 
 AVATAR_POOL_M = [1,2,3,4,5,6,7,8,9,10,11,12,261,496,781,1024,1560,2048,3001,4096,7777,9001,12345]
 AVATAR_POOL_F = [14,15,16,17,18,19,20,21,22,23,24,25,393,934,2456,5000,10000,11111,13555,15555]
+ACCOUNT_USERS = [1,2,3,4,5,6,7,8,9,10,11,12,261,393,496,781,934,1024,1560,2048,2456,3001,4096,5000,7777,9001,10000,11111,12345,15555]
+
+def catalog_map():
+  out = {
+    '1778004652': {'name':'Comando Ultra', 'price':999999999},
+    '48039287': {'name':'Fedora Sao Patricio', 'price':66999},
+    '99641902': {'name':'NINJABART122', 'price':34999999},
+    '17402911590': {'name':'Dragon Fruit', 'price':120},
+    '18915829198': {'name':'SHADOW DRAGON', 'price':500},
+    '16613992677': {'name':'BEST DRAGON', 'price':359},
+    '12357436568': {'name':'FROST DRAGON', 'price':500},
+    'blox-fruit-accounts': {'name':'CONTAS BLOX FRUIT', 'price':10},
+  }
+  for i, uid in enumerate(ACCOUNT_USERS):
+    out[f'bf-{uid}'] = {'name':f'Conta Max Blox Fruits #{i+1}', 'price':10+((i%4)*2)}
+  return out
 
 def norm_gender(v):
   x = str(v or '').strip().lower()
@@ -314,6 +395,33 @@ class H(BaseHTTPRequestHandler):
       em = me(self.headers)
       if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
       return self.j(user_profile(em))
+    if path=='/api/order/status':
+      em = me(self.headers)
+      if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
+      oid = (qs.get('order_id') or [''])[0].strip()
+      if not oid: return self.j({'ok':False,'message':'order_id obrigatorio'},400)
+      o = order_by_id(oid)
+      if not o or o['email'] != em: return self.j({'ok':False,'message':'Pedido nao encontrado'},404)
+      return self.j({'ok':True, 'order':o})
+    if path=='/checkout/success':
+      oid = (qs.get('order_id') or [''])[0].strip()
+      sid = (qs.get('session_id') or [''])[0].strip()
+      if oid and sid and stripe_setup():
+        try:
+          s = stripe.checkout.Session.retrieve(sid)
+          if (s.get('payment_status') == 'paid') and (s.get('metadata') or {}).get('order_id') == oid:
+            set_order_status(oid, 'paid', sid)
+          else:
+            set_order_status(oid, 'pending', sid)
+        except Exception:
+          set_order_status(oid, 'pending', sid)
+      html = "<html><head><meta charset='utf-8'><meta http-equiv='refresh' content='1;url=/'></head><body style='font-family:Segoe UI,Arial;background:#070f1d;color:#e9f6ff;display:grid;place-items:center;height:100vh'><div><h2>Pagamento processado</h2><p>Voltando para o mercado...</p></div></body></html>"
+      return self.h(html,200)
+    if path=='/checkout/cancel':
+      oid = (qs.get('order_id') or [''])[0].strip()
+      if oid: set_order_status(oid, 'canceled')
+      html = "<html><head><meta charset='utf-8'><meta http-equiv='refresh' content='1;url=/'></head><body style='font-family:Segoe UI,Arial;background:#070f1d;color:#e9f6ff;display:grid;place-items:center;height:100vh'><div><h2>Pagamento cancelado</h2><p>Voltando para o mercado...</p></div></body></html>"
+      return self.h(html,200)
     if path.startswith('/auth/'):
       parts=[x for x in path.split('/') if x]
       if len(parts)==2:
@@ -336,8 +444,83 @@ class H(BaseHTTPRequestHandler):
       return self.h(read_file('index.html'))
     self.send_error(404)
   def do_POST(self):
-    cleanup(); path=urlparse(self.path).path; d=self.body()
+    cleanup(); path=urlparse(self.path).path
+    if path=='/api/payments/stripe/webhook':
+      if not stripe_setup() or not STRIPE_WEBHOOK_SECRET:
+        return self.j({'ok':False,'message':'Webhook Stripe nao configurado'},400)
+      try:
+        n = int(self.headers.get('Content-Length','0') or '0')
+      except Exception:
+        n = 0
+      raw = self.rfile.read(n) if n > 0 else b''
+      sig = self.headers.get('Stripe-Signature','')
+      try:
+        event = stripe.Webhook.construct_event(raw, sig, STRIPE_WEBHOOK_SECRET)
+      except Exception:
+        return self.j({'ok':False,'message':'Assinatura invalida'},400)
+      et = event.get('type')
+      obj = (event.get('data') or {}).get('object') or {}
+      md = obj.get('metadata') or {}
+      oid = md.get('order_id')
+      sid = obj.get('id')
+      if oid:
+        if et in ('checkout.session.completed', 'checkout.session.async_payment_succeeded'):
+          set_order_status(oid, 'paid', sid)
+        elif et in ('checkout.session.expired', 'checkout.session.async_payment_failed'):
+          set_order_status(oid, 'failed', sid)
+      return self.j({'ok':True})
+    d=self.body()
     if path=='/api/logout': sid=ck(self.headers.get('Cookie','')); sid and SESSIONS.pop(sid,None); return self.j({'ok':True,'message':'Logout'},e={'Set-Cookie':'session_id=; Path=/; Max-Age=0; HttpOnly'})
+    if path=='/api/checkout/create':
+      em = me(self.headers)
+      if not em: return self.j({'ok':False,'message':'Nao autenticado'},401)
+      if not stripe_setup():
+        return self.j({'ok':False,'message':'Pagamento nao configurado. Defina STRIPE_SECRET_KEY.'},400)
+      raw_items = d.get('items') or []
+      if not isinstance(raw_items, list) or not raw_items:
+        return self.j({'ok':False,'message':'Carrinho vazio'},400)
+      catalog = catalog_map()
+      safe_items, total = [], 0
+      for x in raw_items:
+        if not isinstance(x, dict):
+          continue
+        iid = str(x.get('id') or '').strip()
+        qty = int(x.get('qty') or 0)
+        if not iid or qty < 1 or qty > 99:
+          continue
+        entry = catalog.get(iid)
+        if not entry:
+          continue
+        unit = int(entry['price'])
+        safe_items.append({'id':iid, 'name':entry['name'], 'unit_price':unit, 'qty':qty})
+        total += unit * qty
+      if not safe_items or total <= 0:
+        return self.j({'ok':False,'message':'Itens invalidos no carrinho'},400)
+      order_id = create_order(em, safe_items, total, 'stripe')
+      base = app_base_url()
+      line_items = []
+      for it in safe_items:
+        line_items.append({
+          'price_data': {
+            'currency': 'brl',
+            'product_data': {'name': it['name']},
+            'unit_amount': int(it['unit_price'] * 100),
+          },
+          'quantity': int(it['qty']),
+        })
+      try:
+        sess = stripe.checkout.Session.create(
+          mode='payment',
+          success_url=f"{base}/checkout/success?order_id={order_id}&session_id={{CHECKOUT_SESSION_ID}}",
+          cancel_url=f"{base}/checkout/cancel?order_id={order_id}",
+          line_items=line_items,
+          metadata={'order_id': order_id, 'buyer_email': em},
+        )
+        set_order_status(order_id, 'pending', sess.get('id'))
+        return self.j({'ok':True, 'order_id':order_id, 'checkout_url':sess.get('url')})
+      except Exception as e:
+        print('STRIPE_CREATE_ERR:', repr(e), flush=True)
+        return self.j({'ok':False,'message':'Falha ao iniciar pagamento'},500)
     if path=='/api/phone/send':
       ph=(d.get('phone') or '').strip()
       if len(ph)<8: return self.j({'ok':False,'message':'Celular invalido'},400)
@@ -391,6 +574,7 @@ def run():
   print('Servidor:',u,flush=True)
   print('Callbacks OAuth:',flush=True)
   for p in OAUTH: print(p+': '+cb(p),flush=True)
+  print('Webhook Stripe:', f'{app_base_url()}/api/payments/stripe/webhook', flush=True)
   try:
     if HOST in ('127.0.0.1', 'localhost'):
       open_browser(u)

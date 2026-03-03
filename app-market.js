@@ -201,12 +201,29 @@ function bindUI(){
 
   const payNow = $('#payNow');
   if(payNow){
-    payNow.onclick = ()=>{
-      const total = $('#cartTotal') ? $('#cartTotal').textContent : 'R$ 0';
-      alert('Pagamento confirmado (demo). Total: ' + total);
-      Object.keys(cart).forEach((k)=>delete cart[k]);
-      refreshCart();
-      closeOverlays();
+    payNow.onclick = async ()=>{
+      const items = Object.values(cart).map((i)=>({ id:i.id, qty:i.qty }));
+      if(!items.length){ alert('Carrinho vazio'); return; }
+      payNow.disabled = true;
+      payNow.textContent = 'Abrindo checkout seguro...';
+      try{
+        const r = await fetch('/api/checkout/create', {
+          method:'POST',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify({ items })
+        });
+        const d = await r.json();
+        if(!r.ok || !d.ok || !d.checkout_url){
+          alert(d.message || 'Falha ao iniciar pagamento.');
+          return;
+        }
+        location.href = d.checkout_url;
+      } catch(_){
+        alert('Erro de conexao ao iniciar checkout.');
+      } finally {
+        payNow.disabled = false;
+        payNow.textContent = 'Pagar agora';
+      }
     };
   }
 
