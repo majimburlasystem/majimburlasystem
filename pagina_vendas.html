@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROBUX Vault | Revenda Futurista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-0: #06080f;
+      --bg-1: #0b1220;
+      --panel: rgba(10, 18, 32, 0.72);
+      --line: rgba(83, 184, 255, 0.35);
+      --cyan: #62dbff;
+      --blue: #3b82ff;
+      --green: #65ffbc;
+      --text: #e9f6ff;
+      --muted: #89a8bd;
+      --warning: #ffd166;
+      --shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Rajdhani", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(59, 130, 255, 0.18), transparent 42%),
+        radial-gradient(circle at 88% 16%, rgba(101, 255, 188, 0.12), transparent 30%),
+        linear-gradient(140deg, var(--bg-0), var(--bg-1) 48%, #070d18 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      background-image: linear-gradient(rgba(98, 219, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(98, 219, 255, 0.05) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+    }
+
+    body::after {
+      background: linear-gradient(transparent 65%, rgba(98, 219, 255, 0.06));
+      animation: scan 4.8s linear infinite;
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-55%); }
+      to { transform: translateY(55%); }
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+      padding: 22px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(7, 15, 26, 0.7);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #00111d;
+      box-shadow: 0 0 22px rgba(98, 219, 255, 0.6);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(13, 24, 40, 0.85);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .hero {
+      margin: 26px 0 24px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      right: -110px;
+      top: -140px;
+      background: radial-gradient(circle, rgba(98, 219, 255, 0.42), transparent 72%);
+      filter: blur(8px);
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.12;
+      max-width: 17ch;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s ease;
+      color: #03111d;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      box-shadow: 0 10px 24px rgba(101, 255, 188, 0.25);
+    }
+
+    .btn:hover { transform: translateY(-2px) scale(1.01); }
+
+    .btn.ghost {
+      background: rgba(14, 27, 44, 0.8);
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .hero-side {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(8, 16, 29, 0.84);
+    }
+
+    .kpi b {
+      display: block;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.25rem;
+      color: var(--cyan);
+    }
+
+    .grid-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0 14px;
+    }
+
+    .grid-title h2 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(230px, 1fr));
+      gap: 14px;
+      perspective: 1000px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(7, 15, 28, 0.86);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .3s ease;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -140% -120%;
+      background: linear-gradient(120deg, transparent 42%, rgba(98, 219, 255, 0.27) 50%, transparent 58%);
+      transform: rotate(16deg);
+      transition: transform .8s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::after { transform: rotate(16deg) translateX(45%); }
+
+    .card:hover {
+      border-color: rgba(101, 255, 188, 0.55);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    .item-image {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: linear-gradient(130deg, rgba(59, 130, 255, 0.15), rgba(101, 255, 188, 0.08));
+      border-bottom: 1px solid rgba(98, 219, 255, 0.22);
+    }
+
+    .item-body { padding: 12px; }
+
+    .item-name {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.02rem;
+      letter-spacing: .4px;
+    }
+
+    .item-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .price-row {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price {
+      font-family: "Orbitron", sans-serif;
+      color: var(--warning);
+      font-size: 1.25rem;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.2);
+    }
+
+    .buy {
+      border: 1px solid rgba(101, 255, 188, 0.45);
+      color: var(--text);
+      background: rgba(13, 34, 35, 0.9);
+      border-radius: 10px;
+      padding: 8px 11px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .buy:hover {
+      background: rgba(27, 57, 52, 0.98);
+      transform: translateY(-1px);
+    }
+
+    .buy:active { transform: scale(.97); }
+
+    .ticker {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(10, 20, 34, 0.8);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      min-width: 100%;
+      padding: 10px 0;
+      animation: ticker 16s linear infinite;
+      font-family: "Orbitron", sans-serif;
+      color: var(--cyan);
+      letter-spacing: .8px;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .toast {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(10, 22, 36, 0.95);
+      border: 1px solid rgba(101, 255, 188, 0.48);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .28s ease;
+      font-weight: 700;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 24px;
+      font-size: .95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .items { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: 94vw; }
+      .topbar { padding: 10px; }
+      .brand span { display: none; }
+      .items { grid-template-columns: 1fr; }
+      .top-actions .pill:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">R$</div>
+        <span>ROBUX VAULT // MARKET</span>
+      </div>
+      <div class="top-actions">
+        <div class="pill">ONLINE: 1.274</div>
+        <div class="pill">SECURE TRADE AI: ON</div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Revenda de itens raros Roblox em tempo real</h1>
+        <p class="subtitle">Ambiente futurista inspirado no universo Roblox para compra e revenda de colecionaveis de alto valor em Robux. Interface responsiva, visual cyber e experiencia imersiva.</p>
+        <div class="cta-row">
+          <button class="btn" id="openMarket">Explorar mercado</button>
+          <button class="btn ghost" id="flashPrices">Atualizar precos</button>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div class="kpi"><span>Volume 24h</span><b>R$ 2.4M</b></div>
+        <div class="kpi"><span>Trades Confirmados</span><b>9.832</b></div>
+        <div class="kpi"><span>Taxa Segura</span><b>99.98%</b></div>
+      </aside>
+    </section>
+
+    <section class="grid-title">
+      <h2>Itens em Destaque</h2>
+      <div class="pill">Raros + Limitados</div>
+    </section>
+
+    <main class="items" id="itemGrid">
+      <article class="card" data-price="999999999" data-item="Ultra Commando" data-asset-id="1778004652">
+        <img class="item-image" loading="lazy" src="imagens/1778004652.png" alt="Ultra Commando" />
+        <div class="item-body">
+          <h3 class="item-name">Comando Ultra</h3>
+          <div class="item-meta">Item ID: 1778004652 â€¢ Face Accessory</div>
+          <div class="price-row">
+            <div class="price">R$ 999,999,999</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="66999" data-item="St Patrick's Fedora" data-asset-id="48039287">
+        <img class="item-image" loading="lazy" src="imagens/48039287.png" alt="Fedora Sao Patricio" />
+        <div class="item-body">
+          <h3 class="item-name">Fedora Sao Patricio</h3>
+          <div class="item-meta">Item ID: 48039287 â€¢ Hat Limited</div>
+          <div class="price-row">
+            <div class="price">R$ 66,999</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="34999999" data-item="ninjabart122's ROBLOX Tablet" data-asset-id="99641902">
+        <img class="item-image" loading="lazy" src="imagens/99641902.png" alt="NINJABART122" />
+        <div class="item-body">
+          <h3 class="item-name">NINJABART122</h3>
+          <div class="item-meta">Item ID: 99641902 â€¢ Gear Limited</div>
+          <div class="price-row">
+            <div class="price">R$ 34,999,999</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="120" data-item="Dragon Fruit" data-asset-id="17402911590">
+        <img class="item-image" loading="lazy" src="imagens/17402911590.png" alt="Dragon Fruit" />
+        <div class="item-body">
+          <h3 class="item-name">Dragon Fruit</h3>
+          <div class="item-meta">Item ID: 17402911590 â€¢ UGC Limited</div>
+          <div class="price-row">
+            <div class="price">R$ 120</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="500" data-item="Shadow Dragon" data-asset-id="18915829198">
+        <img class="item-image" loading="lazy" src="imagens/18915829198.png" alt="Shadow Dragon" />
+        <div class="item-body">
+          <h3 class="item-name">SHADOW DRAGON</h3>
+          <div class="item-meta">Item ID: 18915829198 â€¢ Shoulder Accessory</div>
+          <div class="price-row">
+            <div class="price">R$ 500</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="359" data-item="Best Dragon" data-asset-id="16613992677">
+        <img class="item-image" loading="lazy" src="imagens/16613992677.png" alt="Best Dragon" />
+        <div class="item-body">
+          <h3 class="item-name">BEST DRAGON</h3>
+          <div class="item-meta">Item ID: 16613992677 â€¢ Back Accessory</div>
+          <div class="price-row">
+            <div class="price">R$ 359</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="500" data-item="Frost Dragon" data-asset-id="12357436568">
+        <img class="item-image" loading="lazy" src="imagens/12357436568.png" alt="Frost Dragon" />
+        <div class="item-body">
+          <h3 class="item-name">FROST DRAGON</h3>
+          <div class="item-meta">Item ID: 12357436568 â€¢ Back Accessory</div>
+          <div class="price-row">
+            <div class="price">500$</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" data-price="10" data-item="Contas Nivel Maximo Blox Fruits" data-asset-id="2753915549">
+        <img class="item-image" loading="lazy" src="imagens/2753915549.png" alt="Contas Nivel Maximo Blox Fruits" />
+        <div class="item-body">
+          <h3 class="item-name">CONTAS NIVEL MAXIMO BLOX FRUITS</h3>
+          <div class="item-meta">Ref: 2753915549 â€¢ Conta Upada</div>
+          <div class="price-row">
+            <div class="price">10$</div>
+            <button class="buy">Comprar</button>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <section class="ticker" aria-label="Atualizacoes de mercado">
+      <div class="ticker-track">LIVE FEED // ULTRA COMMANDO +0.6% // ST PATRICK'S FEDORA -1.1% // NINJABART122'S TABLET +2.9% // NEXT REFRESH IN 30s // SECURE ROBUX CHECK PASSED //</div>
+    </section>
+
+    <footer>
+      
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Pedido enviado para a fila segura.</div>
+
+  <script>
+    const cards = document.querySelectorAll('.card');
+    const toast = document.getElementById('toast');
+
+    async function loadRealRobloxImages() {
+      const assetIds = [...cards]
+        .map((card) => card.dataset.assetId)
+        .filter(Boolean);
+
+      if (!assetIds.length) return;
+
+      const fallbackMap = {};
+      cards.forEach((card) => {
+        const id = card.dataset.assetId;
+        const img = card.querySelector('.item-image');
+        if (id && img) fallbackMap[id] = img.src;
+      });
+
+      try {
+        const endpoint = `https://thumbnails.roblox.com/v1/assets?assetIds=${assetIds.join(",")}&returnPolicy=PlaceHolder&size=420x420&format=Png&isCircular=false`;
+        const response = await fetch(endpoint);
+        if (!response.ok) throw new Error("Falha ao carregar thumbnails.");
+        const payload = await response.json();
+
+        const byId = {};
+        (payload.data || []).forEach((entry) => {
+          byId[String(entry.targetId)] = entry.imageUrl;
+        });
+
+        cards.forEach((card) => {
+          const id = card.dataset.assetId;
+          const img = card.querySelector('.item-image');
+          if (!id || !img) return;
+          img.src = byId[id] || fallbackMap[id];
+        });
+      } catch (_) {
+        cards.forEach((card) => {
+          const id = card.dataset.assetId;
+          const img = card.querySelector('.item-image');
+          if (id && img && fallbackMap[id]) img.src = fallbackMap[id];
+        });
+      }
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y / rect.height) - 0.5) * -10;
+        const rotateY = ((x / rect.width) - 0.5) * 12;
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    document.querySelectorAll('.buy').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const name = e.target.closest('.card').dataset.item;
+        toast.textContent = `${name} reservado. Confirme o trade no hub.`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+      });
+    });
+
+    document.getElementById('flashPrices').addEventListener('click', () => {
+      document.querySelectorAll('.card').forEach(card => {
+        const base = Number(card.dataset.price);
+        const factor = 1 + ((Math.random() * 1.8 - 0.9) / 100);
+        const next = Math.max(1, Math.round(base * factor));
+        card.querySelector('.price').textContent = `R$ ${next.toLocaleString('en-US')}`;
+      });
+      toast.textContent = 'Precos atualizados com base na volatilidade do mercado.';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2200);
+    });
+
+    document.getElementById('openMarket').addEventListener('click', () => {
+      document.getElementById('itemGrid').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initParticles() {
+      const count = Math.min(80, Math.floor(window.innerWidth / 18));
+      particles = Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.8 + 0.4,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+      }));
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(98, 219, 255, 0.75)';
+        ctx.fill();
+      });
+
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const a = particles[i], b = particles[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 110) {
+            ctx.strokeStyle = `rgba(98, 219, 255, ${(1 - dist / 110) * 0.22})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(drawParticles);
+    }
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    loadRealRobloxImages();
+    resizeCanvas();
+    initParticles();
+    drawParticles();
+  </script>
+</body>
+</html>

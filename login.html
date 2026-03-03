@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Roblox Market</title>
+  <style>
+    :root { --bg:#090f1c; --panel:#0f1b2f; --line:#26466e; --text:#e9f4ff; --muted:#92b3cc; --ok:#62f0a8; --bad:#ff6d7a; }
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 15% 10%, #17325f66, transparent 40%), linear-gradient(160deg, #060a13, var(--bg));}
+    .card{width:min(540px,94vw);background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+    .tabs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
+    .tab,button{border:1px solid var(--line);border-radius:8px;padding:10px;background:#12223a;color:var(--text);cursor:pointer;font-weight:700}
+    .tab.active,.primary{background:linear-gradient(135deg,#53c9ff,#62f0a8);color:#052033;border:0}
+    .panel{display:none}.panel.active{display:block} input,select{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line);background:#0a1424;color:var(--text);margin:6px 0}
+    .row{display:grid;grid-template-columns:1fr auto;gap:8px}.q{min-width:108px;text-align:center;padding:10px;border:1px solid var(--line);border-radius:8px;background:#0a1424}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.social{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px} .msg{min-height:20px;margin-top:10px;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Painel de Login</h2>
+    <p>Validacao por email, social e celular.</p>
+    <div class="tabs">
+      <button class="tab active" data-tab="email">Email</button>
+      <button class="tab" data-tab="social">Social</button>
+      <button class="tab" data-tab="phone">Celular</button>
+    </div>
+
+    <section class="panel active" id="panel-email">
+      <input id="email" type="email" placeholder="Email" />
+      <input id="senha" type="password" placeholder="Senha" />
+      <select id="gender">
+        <option value="masculino">Avatar Masculino</option>
+        <option value="feminino">Avatar Feminino</option>
+      </select>
+      <div class="row"><input id="ce" placeholder="Captcha" /><div id="qe" class="q">...</div></div>
+      <div class="actions"><button id="login" class="primary">Entrar</button><button id="reg">Criar conta</button></div>
+    </section>
+
+    <section class="panel" id="panel-social">
+      <div class="social">
+        <button class="sb" data-provider="google">Google</button>
+        <button class="sb" data-provider="discord">Discord</button>
+        <button class="sb" data-provider="facebook">Facebook</button>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-phone">
+      <input id="phone" placeholder="Celular" />
+      <input id="otp" placeholder="Codigo OTP" />
+      <div class="row"><input id="cp" placeholder="Captcha" /><div id="qp" class="q">...</div></div>
+      <div class="actions"><button id="sendOtp">Enviar codigo</button><button id="phoneLogin" class="primary">Validar</button></div>
+    </section>
+
+    <div id="msg" class="msg"></div>
+  </div>
+
+  <script>
+    let captchaEmailId = '', captchaPhoneId = '', providers = {};
+    const msgEl = document.getElementById('msg');
+    const msg = (t, ok) => { msgEl.textContent = t; msgEl.style.color = ok ? '#62f0a8' : '#ff6d7a'; };
+
+    async function loadCaptcha(kind){
+      const r = await fetch('/api/captcha');
+      const d = await r.json();
+      if(kind==='email'){ captchaEmailId = d.captcha_id; qe.textContent = d.question; ce.value=''; }
+      else { captchaPhoneId = d.captcha_id; qp.textContent = d.question; cp.value=''; }
+    }
+
+    async function loadProviders(){
+      const r = await fetch('/api/oauth/providers');
+      const d = await r.json();
+      providers = d.providers || {};
+      document.querySelectorAll('.sb').forEach((b)=>{ const p=b.dataset.provider; b.disabled = !(providers[p] && providers[p].configured); });
+    }
+
+    async function auth(path){
+      const payload = { email: email.value.trim(), senha: senha.value, gender: gender.value, captcha_id: captchaEmailId, captcha_answer: ce.value.trim() };
+      const r = await fetch(path,{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+      const d = await r.json(); msg(d.message, !!d.ok);
+      if(d.ok && path==='/api/login') setTimeout(()=>location.href='/', 180);
+      loadCaptcha('email');
+    }
+
+    async function send(){
+      const payload = { phone: phone.value.trim(), captcha_id: captchaPhoneId, captcha_answer: cp.value.trim() };
+      const r = await fetch('/api/phone/send',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+      const d = await r.json(); msg(d.message, !!d.ok); loadCaptcha('phone');
+    }
+
+    async function phoneAuth(){
+      const payload = { phone: phone.value.trim(), otp: otp.value.trim(), captcha_id: captchaPhoneId, captcha_answer: cp.value.trim() };
+      const r = await fetch('/api/phone/login',{ method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+      const d = await r.json(); msg(d.message, !!d.ok);
+      if(d.ok) setTimeout(()=>location.href='/', 180);
+      loadCaptcha('phone');
+    }
+
+    login.onclick = ()=>auth('/api/login');
+    reg.onclick = ()=>auth('/api/register');
+    sendOtp.onclick = send;
+    phoneLogin.onclick = phoneAuth;
+    document.querySelectorAll('.sb').forEach((b)=>b.onclick = ()=>{ const p=b.dataset.provider; if(!providers[p] || !providers[p].configured){ msg('OAuth '+p+' nao configurado', false); return; } location.href='/auth/'+p; });
+    document.querySelectorAll('.tab').forEach((t)=>t.onclick=()=>{ document.querySelectorAll('.tab').forEach((x)=>x.classList.remove('active')); document.querySelectorAll('.panel').forEach((x)=>x.classList.remove('active')); t.classList.add('active'); document.getElementById('panel-'+t.dataset.tab).classList.add('active'); });
+
+    loadCaptcha('email'); loadCaptcha('phone'); loadProviders();
+  </script>
+</body>
+</html>

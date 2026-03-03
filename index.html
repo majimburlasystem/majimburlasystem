@@ -1,0 +1,725 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROBUX Vault | Revenda Futurista</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-0: #06080f;
+      --bg-1: #0b1220;
+      --panel: rgba(10, 18, 32, 0.72);
+      --line: rgba(83, 184, 255, 0.35);
+      --cyan: #62dbff;
+      --blue: #3b82ff;
+      --green: #65ffbc;
+      --text: #e9f6ff;
+      --muted: #89a8bd;
+      --warning: #ffd166;
+      --danger: #ff4d6d;
+      --shadow: 0 18px 38px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Rajdhani", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(59, 130, 255, 0.18), transparent 42%),
+        radial-gradient(circle at 88% 16%, rgba(101, 255, 188, 0.12), transparent 30%),
+        linear-gradient(140deg, var(--bg-0), var(--bg-1) 48%, #070d18 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    body::before {
+      background-image: linear-gradient(rgba(98, 219, 255, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(98, 219, 255, 0.05) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
+    }
+
+    body::after {
+      background: linear-gradient(transparent 65%, rgba(98, 219, 255, 0.06));
+      animation: scan 4.8s linear infinite;
+    }
+
+    @keyframes scan {
+      from { transform: translateY(-55%); }
+      to { transform: translateY(55%); }
+    }
+
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: min(1200px, 92vw);
+      margin: 0 auto;
+      padding: 22px 0 40px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(7, 15, 26, 0.7);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Orbitron", sans-serif;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+
+    .logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #00111d;
+      box-shadow: 0 0 22px rgba(98, 219, 255, 0.6);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(13, 24, 40, 0.85);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .hero {
+      margin: 26px 0 24px;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      right: -110px;
+      top: -140px;
+      background: radial-gradient(circle, rgba(98, 219, 255, 0.42), transparent 72%);
+      filter: blur(8px);
+    }
+
+    h1 {
+      font-family: "Orbitron", sans-serif;
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.12;
+      max-width: 17ch;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 0;
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s ease;
+      color: #03111d;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      box-shadow: 0 10px 24px rgba(101, 255, 188, 0.25);
+    }
+
+    .btn:hover { transform: translateY(-2px) scale(1.01); }
+
+    .btn.ghost {
+      background: rgba(14, 27, 44, 0.8);
+      border-color: var(--line);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .hero-side {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+      align-content: center;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(8, 16, 29, 0.84);
+    }
+
+    .kpi b {
+      display: block;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.25rem;
+      color: var(--cyan);
+    }
+
+    .grid-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0 14px;
+    }
+
+    .grid-title h2 {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .items {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(230px, 1fr));
+      gap: 14px;
+      perspective: 1000px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(7, 15, 28, 0.86);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .3s ease;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -140% -120%;
+      background: linear-gradient(120deg, transparent 42%, rgba(98, 219, 255, 0.27) 50%, transparent 58%);
+      transform: rotate(16deg);
+      transition: transform .8s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::after { transform: rotate(16deg) translateX(45%); }
+
+    .card:hover {
+      border-color: rgba(101, 255, 188, 0.55);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    .item-image {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: linear-gradient(130deg, rgba(59, 130, 255, 0.15), rgba(101, 255, 188, 0.08));
+      border-bottom: 1px solid rgba(98, 219, 255, 0.22);
+    }
+
+    .item-body { padding: 12px; }
+
+    .item-name {
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      font-size: 1.02rem;
+      letter-spacing: .4px;
+    }
+
+    .item-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .price-row {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price {
+      font-family: "Orbitron", sans-serif;
+      color: var(--warning);
+      font-size: 1.25rem;
+      text-shadow: 0 0 10px rgba(255, 209, 102, 0.2);
+    }
+
+    .buy {
+      border: 1px solid rgba(101, 255, 188, 0.45);
+      color: var(--text);
+      background: rgba(13, 34, 35, 0.9);
+      border-radius: 10px;
+      padding: 8px 11px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .22s ease;
+    }
+
+    .buy:hover {
+      background: rgba(27, 57, 52, 0.98);
+      transform: translateY(-1px);
+    }
+
+    .buy:active { transform: scale(.97); }
+
+    .ticker {
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(10, 20, 34, 0.8);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-block;
+      min-width: 100%;
+      padding: 10px 0;
+      animation: ticker 16s linear infinite;
+      font-family: "Orbitron", sans-serif;
+      color: var(--cyan);
+      letter-spacing: .8px;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .toast {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(10, 22, 36, 0.95);
+      border: 1px solid rgba(101, 255, 188, 0.48);
+      color: var(--text);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: .28s ease;
+      font-weight: 700;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .drawer,
+    .checkout,
+    .accounts {
+      position: fixed;
+      top: 0;
+      right: -420px;
+      width: min(420px, 95vw);
+      height: 100%;
+      padding: 12px;
+      background: #0c1527;
+      border-left: 1px solid var(--line);
+      box-shadow: -12px 0 24px rgba(0, 0, 0, 0.45);
+      transition: right .22s ease;
+      z-index: 60;
+      overflow: auto;
+    }
+
+    .drawer.open,
+    .checkout.open,
+    .accounts.open {
+      right: 0;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      z-index: 50;
+    }
+
+    .backdrop.show { display: block; }
+
+    .xbtn {
+      float: right;
+      border: 1px solid var(--line);
+      background: rgba(16, 28, 48, 0.9);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    .cart-item, .acc-item {
+      border: 1px solid var(--line);
+      background: rgba(12, 24, 42, 0.85);
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 8px;
+    }
+
+    .qty button {
+      border: 1px solid var(--line);
+      background: rgba(16, 28, 48, 0.9);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 2px 8px;
+      cursor: pointer;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .tab {
+      border: 1px solid var(--line);
+      background: rgba(16, 28, 48, 0.9);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--cyan), var(--green));
+      color: #052033;
+      border: 0;
+    }
+
+    .pay-panel { display: none; }
+    .pay-panel.active { display: block; }
+
+    .pay-input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(9, 18, 32, 0.9);
+      color: var(--text);
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .avatar-hub {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px;
+      background: linear-gradient(165deg, rgba(15, 31, 53, 0.95), rgba(8, 18, 32, 0.88));
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-head {
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 10px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 28px rgba(0, 0, 0, 0.45), 0 0 26px rgba(98, 219, 255, 0.3);
+      transition: transform .25s ease, box-shadow .25s ease;
+      transform: perspective(700px) rotateX(6deg) rotateY(-7deg);
+      position: relative;
+    }
+
+    .avatar-head::before {
+      content: "";
+      position: absolute;
+      inset: -18% -80%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255, 255, 255, 0.35) 50%, transparent 65%);
+      transform: translateX(-40%) rotate(14deg);
+      animation: avatarShine 3.2s linear infinite;
+      pointer-events: none;
+    }
+
+    .avatar-head img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .avatar-head.interact {
+      transform: perspective(800px) rotateX(2deg) rotateY(8deg) scale(1.08);
+      box-shadow: 0 20px 36px rgba(0, 0, 0, 0.55), 0 0 30px rgba(98, 219, 255, 0.46);
+    }
+
+    .avatar-head.waving {
+      animation: avatarWave .48s ease-in-out 3;
+      transform-origin: 50% 90%;
+    }
+
+    .avatar-line {
+      color: var(--muted);
+      font-size: .95rem;
+      margin: 0;
+    }
+
+    .avatar-hub.masc {
+      border-color: rgba(98, 219, 255, 0.45);
+      box-shadow: inset 0 0 0 1px rgba(98, 219, 255, 0.15);
+    }
+
+    .avatar-hub.fem {
+      border-color: rgba(255, 125, 214, 0.45);
+      box-shadow: inset 0 0 0 1px rgba(255, 125, 214, 0.18);
+    }
+
+    .avatar-tag {
+      margin: 8px auto 0;
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .3px;
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(10, 22, 36, 0.92);
+    }
+
+    .avatar-tag.masc {
+      border-color: rgba(98, 219, 255, 0.5);
+      color: #8ddfff;
+    }
+
+    .avatar-tag.fem {
+      border-color: rgba(255, 125, 214, 0.5);
+      color: #ffb0e6;
+    }
+
+    .avatar-walker {
+      position: fixed;
+      width: 72px;
+      height: 72px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(98, 219, 255, 0.35);
+      z-index: 70;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.85);
+      transition: opacity .18s ease;
+    }
+
+    .avatar-walker img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-walker.walking {
+      opacity: 1;
+      animation: walkerBounce .34s ease-in-out infinite alternate;
+    }
+
+    @keyframes walkerBounce {
+      from { transform: translate(-50%, -50%) scale(0.92); }
+      to { transform: translate(-50%, -53%) scale(1); }
+    }
+
+    @keyframes avatarShine {
+      from { transform: translateX(-60%) rotate(14deg); }
+      to { transform: translateX(80%) rotate(14deg); }
+    }
+
+    @keyframes avatarWave {
+      0% { transform: perspective(700px) rotateX(6deg) rotateY(-7deg) rotateZ(0deg); }
+      25% { transform: perspective(700px) rotateX(6deg) rotateY(-7deg) rotateZ(-8deg); }
+      50% { transform: perspective(700px) rotateX(6deg) rotateY(-7deg) rotateZ(9deg); }
+      75% { transform: perspective(700px) rotateX(6deg) rotateY(-7deg) rotateZ(-6deg); }
+      100% { transform: perspective(700px) rotateX(6deg) rotateY(-7deg) rotateZ(0deg); }
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 24px;
+      font-size: .95rem;
+    }
+
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+      .items { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: 94vw; }
+      .topbar { padding: 10px; }
+      .brand span { display: none; }
+      .items { grid-template-columns: 1fr; }
+      .top-actions .pill:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">R$</div>
+        <span>ROBUX VAULT // MARKET</span>
+      </div>
+      <div class="top-actions">
+        <button class="btn ghost" id="openCart">Carrinho</button>
+        <button class="btn ghost" id="logoutBtn">Sair</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Revendas de itens Roblox</h1>
+        <p class="subtitle">Ambiente futurista inspirado no universo Roblox para compra e revenda de colecionáveis de alto valor em Robux. Interface responsiva, visual cyber e experiência imersiva.</p>
+        <div class="cta-row">
+          <button class="btn" id="openMarket">Explorar mercado</button>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div id="avatarHub" class="avatar-hub">
+          <div class="avatar-head"><img src="/static/roblox/thumb/user/1" alt="Avatar Roblox" /></div>
+          <p class="avatar-line">Carregando avatar...</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid-title">
+      <h2>Itens em Destaque</h2>
+      <div class="pill">Raros + Limitados</div>
+    </section>
+
+    <main class="items" id="itemGrid"></main>
+
+    <section class="ticker" aria-label="Atualizações de mercado">
+      <div class="ticker-track">LIVE FEED // ULTRA COMMANDO +0.6% // ST PATRICK'S FEDORA -1.1% // NINJABART122'S TABLET +2.9% // NEXT REFRESH IN 30s // SECURE ROBUX CHECK PASSED //</div>
+    </section>
+
+    <footer>
+      Protótipo visual de marketplace temático Roblox. Sem integração oficial com transações reais.
+    </footer>
+  </div>
+
+  <div class="toast" id="toast">Pedido enviado para a fila segura.</div>
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer">
+    <button class="xbtn" id="closeDrawer">X</button>
+    <h3>Carrinho</h3>
+    <div id="cartItems"></div>
+    <p>Total: <b id="cartTotal">R$ 0</b></p>
+    <button class="btn" id="goCheckout">Finalizar compra</button>
+  </aside>
+  <aside class="checkout" id="checkout">
+    <button class="xbtn" id="closeCheckout">X</button>
+    <h3>Pagamento</h3>
+    <div class="tabs">
+      <button class="tab active" data-pay="card">Cartao</button>
+      <button class="tab" data-pay="pix">PIX</button>
+    </div>
+    <div class="pay-panel active" id="panel-card">
+      <input class="pay-input" placeholder="Nome no cartao" />
+      <input class="pay-input" placeholder="Numero do cartao" />
+      <input class="pay-input" placeholder="Validade MM/AA" />
+      <input class="pay-input" placeholder="CVV" />
+    </div>
+    <div class="pay-panel" id="panel-pix">
+      <input class="pay-input" placeholder="Nome completo" />
+      <input class="pay-input" placeholder="CPF" />
+      <input class="pay-input" value="pix-market@robuxvault.com" readonly />
+    </div>
+    <button class="btn" id="payNow">Pagar agora</button>
+  </aside>
+  <aside class="accounts" id="accounts">
+    <button class="xbtn" id="closeAccounts">X</button>
+    <h3>Contas Blox Fruits (dentro do produto)</h3>
+    <div id="accountsList"></div>
+  </aside>
+
+  <script src="script.js"></script>
+  <script src="/static/app-market.js"></script>
+</body>
+</html>
+
+
+
+
