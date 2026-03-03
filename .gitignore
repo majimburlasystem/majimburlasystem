@@ -16,3 +16,5 @@ server_err.log
 .env.*
 
 .vscode/*.code-workspace
+node_modules/
+.vscode/

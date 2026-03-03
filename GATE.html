@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard de Pagamentos da Railway</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+    #payment-chart {
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Dashboard de Pagamentos - Railway</h2>
+    <form id="payment-form">
+      <label for="card-number">Número do Cartão:</label>
+      <input type="text" id="card-number" required>
+
+      <label for="card-name">Nome no Cartão:</label>
+      <input type="text" id="card-name" required>
+
+      <label for="card-expiry">Data de Expiração (MM/AA):</label>
+      <input type="text" id="card-expiry" required>
+
+      <label for="card-cvv">CVV:</label>
+      <input type="text" id="card-cvv" required>
+
+      <button type="submit">Pagar</button>
+    </form>
+
+    <h3>Relatório de Pagamentos</h3>
+    <canvas id="payment-chart"></canvas>
+  </div>
+
+  <script>
+    const form = document.getElementById('payment-form');
+    const ctx = document.getElementById('payment-chart').getContext('2d');
+    let chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Janeiro', 'Fevereiro', 'Março'],
+        datasets: [{
+          label: 'Pagamentos',
+          data: [120, 190, 300],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const cardNumber = document.getElementById('card-number').value;
+      const cardName = document.getElementById('card-name').value;
+      const cardExpiry = document.getElementById('card-expiry').value;
+      const cardCVV = document.getElementById('card-cvv').value;
+
+      // Enviando para backend
+      const response = await fetch('/process-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          cardNumber,
+          cardName,
+          cardExpiry,
+          cardCVV
+        })
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert('Pagamento realizado com sucesso!');
+        // Atualizar gráfico (exemplo)
+        chart.data.datasets[0].data.push(data.amount);
+        chart.update();
+      } else {
+        alert('Erro no pagamento.');
+      }
+    });
+  </script>
+</body>
+</html>

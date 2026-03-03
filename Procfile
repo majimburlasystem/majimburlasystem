@@ -1,1 +1,1 @@
-web: python pagina.py
+web: node serve.js
