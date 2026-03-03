@@ -410,6 +410,14 @@ class H(BaseHTTPRequestHandler):
     self.end_headers(); self.wfile.write(b)
   def h(self,x,s=200):
     b=x.encode(); self.send_response(s); self.send_header('Content-Type','text/html; charset=utf-8'); self.send_header('Content-Length',str(len(b))); self.end_headers(); self.wfile.write(b)
+  def js(self, x, s=200):
+    b = x.encode('utf-8')
+    self.send_response(s)
+    self.send_header('Content-Type', 'application/javascript; charset=utf-8')
+    self.send_header('Content-Length', str(len(b)))
+    self.send_header('Cache-Control', 'no-store')
+    self.end_headers()
+    self.wfile.write(b)
   def red(self,u,c=None): self.send_response(302); self.send_header('Location',u); c and self.send_header('Set-Cookie',c); self.end_headers()
   def body(self):
     try:n=int(self.headers.get('Content-Length','0'))
@@ -449,7 +457,7 @@ class H(BaseHTTPRequestHandler):
     self.wfile.write(d)
   def do_GET(self):
     cleanup(); p=urlparse(self.path); path=p.path; qs=parse_qs(p.query)
-    if path=='/static/app-market.js': return self.h(read_file('app-market.js'))
+    if path=='/static/app-market.js': return self.js(read_file('app-market.js'))
     if path == '/script.js':
       return self.file_out(BASE / 'script.js')
     if path.startswith('/imagens/'):
