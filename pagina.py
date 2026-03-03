@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import json
+import base64
 import mimetypes
 import os
 import secrets
@@ -42,6 +43,7 @@ ROBLOX_JSON_CACHE = {}
 ROBLOX_JSON_NEG_TTL = 8
 ROBLOX_THUMB_BLOCK_SECONDS = 20
 ROBLOX_THUMB_BLOCK_UNTIL = 0.0
+PNG_PLACEHOLDER_BYTES = base64.b64decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Y9z7nQAAAAASUVORK5CYII=')
 
 SESSIONS, CAPTCHAS, OTPS, STATES = {}, {}, {}, {}
 SESSION_TTL, CAPTCHA_TTL, OTP_TTL, STATE_TTL = 28800, 180, 300, 300
@@ -437,6 +439,14 @@ class H(BaseHTTPRequestHandler):
     self.send_header('Cache-Control', 'public, max-age=3600')
     self.end_headers()
     self.wfile.write(data)
+  def png_placeholder(self):
+    d = PNG_PLACEHOLDER_BYTES
+    self.send_response(200)
+    self.send_header('Content-Type', 'image/png')
+    self.send_header('Content-Length', str(len(d)))
+    self.send_header('Cache-Control', 'public, max-age=300')
+    self.end_headers()
+    self.wfile.write(d)
   def do_GET(self):
     cleanup(); p=urlparse(self.path); path=p.path; qs=parse_qs(p.query)
     if path=='/static/app-market.js': return self.h(read_file('app-market.js'))
@@ -444,7 +454,10 @@ class H(BaseHTTPRequestHandler):
       return self.file_out(BASE / 'script.js')
     if path.startswith('/imagens/'):
       safe = path.lstrip('/').replace('..', '')
-      return self.file_out(BASE / safe)
+      p = BASE / safe
+      if p.exists() and p.is_file():
+        return self.file_out(p)
+      return self.png_placeholder()
     if path.startswith('/static/roblox/thumb/avatar/'):
       uid=path.rsplit('/',1)[-1]
       u = None
@@ -461,7 +474,7 @@ class H(BaseHTTPRequestHandler):
       fb = default_thumb_fallback()
       if fb:
         return self.file_out(fb)
-      self.send_error(404); return
+      return self.png_placeholder()
     if path.startswith('/static/roblox/thumb/asset/'):
       aid=path.rsplit('/',1)[-1]
       try:
@@ -474,7 +487,7 @@ class H(BaseHTTPRequestHandler):
       fb = asset_local_fallback(aid) or default_thumb_fallback()
       if fb:
         return self.file_out(fb)
-      self.send_error(404); return
+      return self.png_placeholder()
     if path.startswith('/static/roblox/thumb/user/'):
       uid=path.rsplit('/',1)[-1]
       d=thumb_json_get('https://thumbnails.roblox.com/v1/users/avatar-headshot?'+urlencode({'userIds':uid,'size':'420x420','format':'Png','isCircular':'false'}))
@@ -484,7 +497,7 @@ class H(BaseHTTPRequestHandler):
       fb = default_thumb_fallback()
       if fb:
         return self.file_out(fb)
-      self.send_error(404); return
+      return self.png_placeholder()
     if path=='/api/captcha':
       cid,q=captcha(); return self.j({'captcha_id':cid,'question':q})
     if path=='/api/oauth/providers':
