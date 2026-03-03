@@ -223,9 +223,12 @@ function bindUI(){
           headers:{ 'Content-Type':'application/json' },
           body: JSON.stringify({ items })
         });
-        const d = await r.json();
+        const raw = await r.text();
+        let d = {};
+        try { d = JSON.parse(raw || '{}'); } catch (_) {}
         if(!r.ok || !d.ok || !d.checkout_url){
-          alert(d.message || 'Falha ao iniciar pagamento.');
+          const msg = d.message || raw || `HTTP ${r.status}`;
+          alert(`Falha ao iniciar pagamento (${r.status}): ${String(msg).slice(0, 280)}`);
           return;
         }
         location.href = d.checkout_url;
