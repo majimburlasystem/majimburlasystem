@@ -1,0 +1,40 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v24.15.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\USER\Desktop\evo\web\.npmrc
+5 silly config load:file:C:\Users\USER\.npmrc
+6 silly config load:file:C:\Users\USER\Desktop\evo\.appdata\npm\etc\npmrc
+7 verbose title npm install @types/sql.js
+8 verbose argv "install" "--save-dev" "@types/sql.js" "--no-audit" "--no-fund" "--ignore-scripts"
+9 verbose logfile logs-max:10 dir:C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T13_14_58_383Z-
+10 verbose logfile C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T13_14_58_383Z-debug-0.log
+11 silly logfile start cleaning logs, removing 1 files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest @types/sql.js@*
+16 silly packumentCache full:https://registry.npmjs.org/@types%2fsql.js cache-miss
+17 http cache https://registry.npmjs.org/@types%2fsql.js 67ms (cache hit)
+18 silly packumentCache full:https://registry.npmjs.org/@types%2fsql.js set size:50269 disposed:false
+19 silly placeDep ROOT @types/sql.js@1.4.11 OK for: web@0.1.0 want: *
+20 silly fetch manifest @types/emscripten@*
+21 silly packumentCache full:https://registry.npmjs.org/@types%2femscripten cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/@types%2femscripten 83ms (cache miss)
+23 silly packumentCache full:https://registry.npmjs.org/@types%2femscripten set size:undefined disposed:false
+24 silly placeDep ROOT @types/emscripten@1.41.5 OK for: @types/sql.js@1.4.11 want: *
+25 silly reify moves {}
+26 http cache @types/sql.js@https://registry.npmjs.org/@types/sql.js/-/sql.js-1.4.11.tgz 0ms (cache hit)
+27 http cache @types/emscripten@https://registry.npmjs.org/@types/emscripten/-/emscripten-1.41.5.tgz 0ms (cache hit)
+28 silly tarball no local data for @types/sql.js@https://registry.npmjs.org/@types/sql.js/-/sql.js-1.4.11.tgz. Extracting by manifest.
+29 silly tarball no local data for @types/emscripten@https://registry.npmjs.org/@types/emscripten/-/emscripten-1.41.5.tgz. Extracting by manifest.
+30 http fetch GET 200 https://registry.npmjs.org/@types/emscripten/-/emscripten-1.41.5.tgz 631ms (cache miss)
+31 http fetch GET 200 https://registry.npmjs.org/@types/sql.js/-/sql.js-1.4.11.tgz 633ms (cache miss)
+32 silly ADD node_modules/@types/emscripten
+33 silly ADD node_modules/@types/sql.js
+34 verbose cwd C:\Users\USER\Desktop\evo\web
+35 verbose os Windows_NT 10.0.26200
+36 verbose node v24.15.0
+37 verbose npm  v11.12.1
+38 verbose exit 0
+39 info ok

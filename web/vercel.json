@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "nodeVersion": "20.x",
+  "env": {
+    "ADMIN_SESSION_SECRET": {
+      "description": "Chave secreta para sessões de admin. Gere uma chave aleatória forte.",
+      "required": true
+    },
+    "ADMIN_PASSWORD_HASH": {
+      "description": "Hash da senha do admin. Gere com: node scripts/hash-admin-password.mjs 'sua_senha'",
+      "required": true
+    },
+    "DATABASE_PATH": {
+      "description": "Caminho do banco de dados SQLite",
+      "default": "./data/evo.db"
+    }
+  }
+}

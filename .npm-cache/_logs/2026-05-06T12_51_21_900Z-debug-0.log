@@ -1,0 +1,437 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v24.15.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\USER\Desktop\evo\web\.npmrc
+5 silly config load:file:C:\Users\USER\.npmrc
+6 silly config load:file:C:\Users\USER\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install @vladmandic/face-api @tensorflow/tfjs
+8 verbose argv "install" "@vladmandic/face-api" "@tensorflow/tfjs" "--no-audit" "--no-fund" "--ignore-scripts"
+9 verbose logfile logs-max:10 dir:C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T12_51_21_900Z-
+10 verbose logfile C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T12_51_21_900Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly fetch manifest @vladmandic/face-api@*
+15 silly packumentCache full:https://registry.npmjs.org/@vladmandic%2fface-api cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/@vladmandic%2fface-api 705ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/@vladmandic%2fface-api set size:undefined disposed:false
+18 silly fetch manifest @tensorflow/tfjs@*
+19 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs 579ms (cache miss)
+21 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs set size:undefined disposed:false
+22 silly placeDep ROOT @tensorflow/tfjs@4.22.0 OK for: web@0.1.0 want: *
+23 silly placeDep ROOT @vladmandic/face-api@1.7.15 OK for: web@0.1.0 want: *
+24 silly fetch manifest yargs@^16.0.3
+25 silly packumentCache full:https://registry.npmjs.org/yargs cache-miss
+26 silly fetch manifest core-js@3.29.1
+27 silly packumentCache full:https://registry.npmjs.org/core-js cache-miss
+28 silly fetch manifest argparse@^1.0.10
+29 silly packumentCache full:https://registry.npmjs.org/argparse cache-miss
+30 silly fetch manifest regenerator-runtime@^0.13.5
+31 silly packumentCache full:https://registry.npmjs.org/regenerator-runtime cache-miss
+32 silly fetch manifest @tensorflow/tfjs-core@4.22.0
+33 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-core cache-miss
+34 silly fetch manifest @tensorflow/tfjs-data@4.22.0
+35 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-data cache-miss
+36 silly fetch manifest @tensorflow/tfjs-layers@4.22.0
+37 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-layers cache-miss
+38 silly fetch manifest @tensorflow/tfjs-converter@4.22.0
+39 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-converter cache-miss
+40 silly fetch manifest @tensorflow/tfjs-backend-cpu@4.22.0
+41 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-backend-cpu cache-miss
+42 silly fetch manifest @tensorflow/tfjs-backend-webgl@4.22.0
+43 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-backend-webgl cache-miss
+44 http cache https://registry.npmjs.org/argparse 52ms (cache hit)
+45 silly packumentCache full:https://registry.npmjs.org/argparse set size:49266 disposed:false
+46 http fetch GET 200 https://registry.npmjs.org/yargs 71ms (cache miss)
+47 silly packumentCache full:https://registry.npmjs.org/yargs set size:undefined disposed:false
+48 http fetch GET 200 https://registry.npmjs.org/regenerator-runtime 80ms (cache miss)
+49 silly packumentCache full:https://registry.npmjs.org/regenerator-runtime set size:undefined disposed:false
+50 http fetch GET 200 https://registry.npmjs.org/core-js 147ms (cache miss)
+51 silly packumentCache full:https://registry.npmjs.org/core-js set size:undefined disposed:false
+52 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-core 267ms (cache miss)
+53 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-core set size:undefined disposed:false
+54 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-converter 328ms (cache miss)
+55 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-converter set size:undefined disposed:false
+56 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-backend-webgl 667ms (cache miss)
+57 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-backend-webgl set size:undefined disposed:false
+58 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-layers 681ms (cache miss)
+59 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-layers set size:undefined disposed:false
+60 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-backend-cpu 694ms (cache miss)
+61 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-backend-cpu set size:undefined disposed:false
+62 http fetch GET 200 https://registry.npmjs.org/@tensorflow%2ftfjs-data 702ms (cache miss)
+63 silly packumentCache full:https://registry.npmjs.org/@tensorflow%2ftfjs-data set size:undefined disposed:false
+64 silly fetch manifest seedrandom@^3.0.5
+65 silly packumentCache full:https://registry.npmjs.org/seedrandom cache-miss
+66 http fetch GET 200 https://registry.npmjs.org/seedrandom 241ms (cache miss)
+67 silly packumentCache full:https://registry.npmjs.org/seedrandom set size:undefined disposed:false
+68 silly placeDep ROOT @tensorflow/tfjs-backend-cpu@4.22.0 OK for: @tensorflow/tfjs@4.22.0 want: 4.22.0
+69 silly placeDep ROOT @tensorflow/tfjs-core@4.22.0 OK for: @tensorflow/tfjs-backend-cpu@4.22.0 want: 4.22.0
+70 silly placeDep ROOT @tensorflow/tfjs-backend-webgl@4.22.0 OK for: @tensorflow/tfjs@4.22.0 want: 4.22.0
+71 silly placeDep ROOT @tensorflow/tfjs-converter@4.22.0 OK for: @tensorflow/tfjs@4.22.0 want: 4.22.0
+72 silly placeDep ROOT @tensorflow/tfjs-data@4.22.0 OK for: @tensorflow/tfjs@4.22.0 want: 4.22.0
+73 silly placeDep ROOT seedrandom@3.0.5 OK for: @tensorflow/tfjs-data@4.22.0 want: ^3.0.5
+74 silly placeDep ROOT @tensorflow/tfjs-layers@4.22.0 OK for: @tensorflow/tfjs@4.22.0 want: 4.22.0
+75 silly placeDep node_modules/@tensorflow/tfjs argparse@1.0.10 OK for: @tensorflow/tfjs@4.22.0 want: ^1.0.10
+76 silly placeDep ROOT core-js@3.29.1 OK for: @tensorflow/tfjs@4.22.0 want: 3.29.1
+77 silly placeDep ROOT regenerator-runtime@0.13.11 OK for: @tensorflow/tfjs@4.22.0 want: ^0.13.5
+78 silly placeDep ROOT yargs@16.2.0 OK for: @tensorflow/tfjs@4.22.0 want: ^16.0.3
+79 silly fetch manifest @types/seedrandom@^2.4.28
+80 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom cache-miss
+81 silly fetch manifest long@4.0.0
+82 silly packumentCache full:https://registry.npmjs.org/long cache-miss
+83 silly fetch manifest node-fetch@~2.6.1
+84 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+85 silly fetch manifest @types/long@^4.0.1
+86 silly packumentCache full:https://registry.npmjs.org/@types%2flong cache-miss
+87 silly fetch manifest @webgpu/types@0.1.38
+88 silly packumentCache full:https://registry.npmjs.org/@webgpu%2ftypes cache-miss
+89 silly fetch manifest @types/seedrandom@^2.4.28
+90 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom cache-miss
+91 silly fetch manifest @types/offscreencanvas@~2019.7.0
+92 silly packumentCache full:https://registry.npmjs.org/@types%2foffscreencanvas cache-miss
+93 silly fetch manifest @types/seedrandom@^2.4.28
+94 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom cache-miss
+95 silly fetch manifest @types/offscreencanvas@~2019.3.0
+96 silly packumentCache full:https://registry.npmjs.org/@types%2foffscreencanvas cache-miss
+97 silly fetch manifest node-fetch@~2.6.1
+98 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+99 silly fetch manifest string_decoder@^1.3.0
+100 silly packumentCache full:https://registry.npmjs.org/string_decoder cache-miss
+101 http fetch GET 200 https://registry.npmjs.org/@types%2foffscreencanvas 55ms (cache miss)
+102 silly packumentCache full:https://registry.npmjs.org/@types%2foffscreencanvas set size:undefined disposed:false
+103 silly fetch manifest @types/node-fetch@^2.1.2
+104 silly packumentCache full:https://registry.npmjs.org/@types%2fnode-fetch cache-miss
+105 http fetch GET 200 https://registry.npmjs.org/@types%2foffscreencanvas 54ms (cache miss)
+106 silly packumentCache full:https://registry.npmjs.org/@types%2foffscreencanvas set size:undefined disposed:false
+107 silly fetch manifest sprintf-js@~1.0.2
+108 silly packumentCache full:https://registry.npmjs.org/sprintf-js cache-miss
+109 http fetch GET 200 https://registry.npmjs.org/@types%2flong 62ms (cache miss)
+110 silly packumentCache full:https://registry.npmjs.org/@types%2flong set size:undefined disposed:false
+111 silly fetch manifest y18n@^5.0.5
+112 silly packumentCache full:https://registry.npmjs.org/y18n cache-miss
+113 http fetch GET 200 https://registry.npmjs.org/long 70ms (cache miss)
+114 silly packumentCache full:https://registry.npmjs.org/long set size:undefined disposed:false
+115 silly fetch manifest cliui@^7.0.2
+116 silly packumentCache full:https://registry.npmjs.org/cliui cache-miss
+117 http fetch GET 200 https://registry.npmjs.org/string_decoder 71ms (cache miss)
+118 silly packumentCache full:https://registry.npmjs.org/string_decoder set size:undefined disposed:false
+119 silly fetch manifest string-width@^4.2.0
+120 silly packumentCache full:https://registry.npmjs.org/string-width cache-miss
+121 http fetch GET 200 https://registry.npmjs.org/node-fetch 97ms (cache miss)
+122 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:undefined disposed:false
+123 silly fetch manifest yargs-parser@^20.2.2
+124 silly packumentCache full:https://registry.npmjs.org/yargs-parser cache-miss
+125 http fetch GET 200 https://registry.npmjs.org/sprintf-js 57ms (cache miss)
+126 silly packumentCache full:https://registry.npmjs.org/sprintf-js set size:undefined disposed:false
+127 silly fetch manifest get-caller-file@^2.0.5
+128 silly packumentCache full:https://registry.npmjs.org/get-caller-file cache-miss
+129 http fetch GET 200 https://registry.npmjs.org/y18n 64ms (cache miss)
+130 silly packumentCache full:https://registry.npmjs.org/y18n set size:undefined disposed:false
+131 silly fetch manifest require-directory@^2.1.1
+132 silly packumentCache full:https://registry.npmjs.org/require-directory cache-miss
+133 http fetch GET 200 https://registry.npmjs.org/@types%2fnode-fetch 70ms (cache miss)
+134 silly packumentCache full:https://registry.npmjs.org/@types%2fnode-fetch set size:undefined disposed:false
+135 http fetch GET 200 https://registry.npmjs.org/node-fetch 130ms (cache miss)
+136 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:undefined disposed:false
+137 http fetch GET 200 https://registry.npmjs.org/cliui 77ms (cache miss)
+138 silly packumentCache full:https://registry.npmjs.org/cliui set size:undefined disposed:false
+139 http fetch GET 200 https://registry.npmjs.org/string-width 74ms (cache miss)
+140 silly packumentCache full:https://registry.npmjs.org/string-width set size:undefined disposed:false
+141 http fetch GET 200 https://registry.npmjs.org/get-caller-file 39ms (cache miss)
+142 silly packumentCache full:https://registry.npmjs.org/get-caller-file set size:undefined disposed:false
+143 http fetch GET 200 https://registry.npmjs.org/yargs-parser 59ms (cache miss)
+144 silly packumentCache full:https://registry.npmjs.org/yargs-parser set size:undefined disposed:false
+145 http fetch GET 200 https://registry.npmjs.org/require-directory 43ms (cache miss)
+146 silly packumentCache full:https://registry.npmjs.org/require-directory set size:undefined disposed:false
+147 http fetch GET 200 https://registry.npmjs.org/@types%2fseedrandom 449ms (cache miss)
+148 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom set size:undefined disposed:false
+149 http fetch GET 200 https://registry.npmjs.org/@types%2fseedrandom 457ms (cache miss)
+150 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom set size:undefined disposed:false
+151 http fetch GET 200 https://registry.npmjs.org/@types%2fseedrandom 453ms (cache miss)
+152 silly packumentCache full:https://registry.npmjs.org/@types%2fseedrandom set size:undefined disposed:false
+153 http fetch GET 200 https://registry.npmjs.org/@webgpu%2ftypes 583ms (cache miss)
+154 silly packumentCache full:https://registry.npmjs.org/@webgpu%2ftypes set size:undefined disposed:false
+155 silly placeDep ROOT @types/seedrandom@2.4.34 OK for: @tensorflow/tfjs-backend-cpu@4.22.0 want: ^2.4.28
+156 silly placeDep ROOT @types/offscreencanvas@2019.3.0 OK for: @tensorflow/tfjs-backend-webgl@4.22.0 want: ~2019.3.0
+157 silly fetch manifest encoding@^0.1.0
+158 silly packumentCache full:https://registry.npmjs.org/encoding cache-miss
+159 http fetch GET 200 https://registry.npmjs.org/encoding 35ms (cache miss)
+160 silly packumentCache full:https://registry.npmjs.org/encoding set size:undefined disposed:false
+161 silly placeDep ROOT @types/long@4.0.2 OK for: @tensorflow/tfjs-core@4.22.0 want: ^4.0.1
+162 silly placeDep node_modules/@tensorflow/tfjs-core @types/offscreencanvas@2019.7.3 OK for: @tensorflow/tfjs-core@4.22.0 want: ~2019.7.0
+163 silly placeDep ROOT @webgpu/types@0.1.38 OK for: @tensorflow/tfjs-core@4.22.0 want: 0.1.38
+164 silly placeDep ROOT long@4.0.0 OK for: @tensorflow/tfjs-core@4.22.0 want: 4.0.0
+165 silly placeDep ROOT node-fetch@2.6.13 OK for: @tensorflow/tfjs-core@4.22.0 want: ~2.6.1
+166 silly fetch manifest whatwg-url@^5.0.0
+167 silly packumentCache full:https://registry.npmjs.org/whatwg-url cache-miss
+168 http fetch GET 200 https://registry.npmjs.org/whatwg-url 36ms (cache miss)
+169 silly packumentCache full:https://registry.npmjs.org/whatwg-url set size:undefined disposed:false
+170 silly placeDep ROOT @types/node-fetch@2.6.13 OK for: @tensorflow/tfjs-data@4.22.0 want: ^2.1.2
+171 silly placeDep ROOT string_decoder@1.3.0 OK for: @tensorflow/tfjs-data@4.22.0 want: ^1.3.0
+172 silly fetch manifest form-data@^4.0.4
+173 silly packumentCache full:https://registry.npmjs.org/form-data cache-miss
+174 silly fetch manifest safe-buffer@~5.2.0
+175 silly packumentCache full:https://registry.npmjs.org/safe-buffer cache-miss
+176 http fetch GET 200 https://registry.npmjs.org/safe-buffer 34ms (cache miss)
+177 silly packumentCache full:https://registry.npmjs.org/safe-buffer set size:undefined disposed:false
+178 http fetch GET 200 https://registry.npmjs.org/form-data 40ms (cache miss)
+179 silly packumentCache full:https://registry.npmjs.org/form-data set size:undefined disposed:false
+180 silly placeDep ROOT form-data@4.0.5 OK for: @types/node-fetch@2.6.13 want: ^4.0.4
+181 silly fetch manifest asynckit@^0.4.0
+182 silly packumentCache full:https://registry.npmjs.org/asynckit cache-miss
+183 silly fetch manifest combined-stream@^1.0.8
+184 silly packumentCache full:https://registry.npmjs.org/combined-stream cache-miss
+185 silly fetch manifest mime-types@^2.1.12
+186 silly packumentCache full:https://registry.npmjs.org/mime-types cache-miss
+187 http fetch GET 200 https://registry.npmjs.org/combined-stream 31ms (cache miss)
+188 silly packumentCache full:https://registry.npmjs.org/combined-stream set size:undefined disposed:false
+189 http fetch GET 200 https://registry.npmjs.org/asynckit 33ms (cache miss)
+190 silly packumentCache full:https://registry.npmjs.org/asynckit set size:undefined disposed:false
+191 http fetch GET 200 https://registry.npmjs.org/mime-types 39ms (cache miss)
+192 silly packumentCache full:https://registry.npmjs.org/mime-types set size:undefined disposed:false
+193 silly placeDep ROOT asynckit@0.4.0 OK for: form-data@4.0.5 want: ^0.4.0
+194 silly placeDep ROOT combined-stream@1.0.8 OK for: form-data@4.0.5 want: ^1.0.8
+195 silly placeDep ROOT mime-types@2.1.35 OK for: form-data@4.0.5 want: ^2.1.12
+196 silly fetch manifest delayed-stream@~1.0.0
+197 silly packumentCache full:https://registry.npmjs.org/delayed-stream cache-miss
+198 silly fetch manifest mime-db@1.52.0
+199 silly packumentCache full:https://registry.npmjs.org/mime-db cache-miss
+200 http fetch GET 200 https://registry.npmjs.org/delayed-stream 43ms (cache miss)
+201 silly packumentCache full:https://registry.npmjs.org/delayed-stream set size:undefined disposed:false
+202 http fetch GET 200 https://registry.npmjs.org/mime-db 54ms (cache miss)
+203 silly packumentCache full:https://registry.npmjs.org/mime-db set size:undefined disposed:false
+204 silly placeDep ROOT delayed-stream@1.0.0 OK for: combined-stream@1.0.8 want: ~1.0.0
+205 silly placeDep ROOT mime-db@1.52.0 OK for: mime-types@2.1.35 want: 1.52.0
+206 silly placeDep ROOT whatwg-url@5.0.0 OK for: node-fetch@2.6.13 want: ^5.0.0
+207 silly fetch manifest tr46@~0.0.3
+208 silly packumentCache full:https://registry.npmjs.org/tr46 cache-miss
+209 silly fetch manifest webidl-conversions@^3.0.0
+210 silly packumentCache full:https://registry.npmjs.org/webidl-conversions cache-miss
+211 http fetch GET 200 https://registry.npmjs.org/webidl-conversions 29ms (cache miss)
+212 silly packumentCache full:https://registry.npmjs.org/webidl-conversions set size:undefined disposed:false
+213 http fetch GET 200 https://registry.npmjs.org/tr46 34ms (cache miss)
+214 silly packumentCache full:https://registry.npmjs.org/tr46 set size:undefined disposed:false
+215 silly placeDep ROOT safe-buffer@5.2.1 OK for: string_decoder@1.3.0 want: ~5.2.0
+216 silly placeDep ROOT tr46@0.0.3 OK for: whatwg-url@5.0.0 want: ~0.0.3
+217 silly placeDep ROOT webidl-conversions@3.0.1 OK for: whatwg-url@5.0.0 want: ^3.0.0
+218 silly placeDep ROOT cliui@7.0.4 OK for: yargs@16.2.0 want: ^7.0.2
+219 silly placeDep ROOT get-caller-file@2.0.5 OK for: yargs@16.2.0 want: ^2.0.5
+220 silly placeDep ROOT require-directory@2.1.1 OK for: yargs@16.2.0 want: ^2.1.1
+221 silly placeDep ROOT string-width@4.2.3 OK for: yargs@16.2.0 want: ^4.2.0
+222 silly placeDep ROOT y18n@5.0.8 OK for: yargs@16.2.0 want: ^5.0.5
+223 silly placeDep ROOT yargs-parser@20.2.9 OK for: yargs@16.2.0 want: ^20.2.2
+224 silly fetch manifest wrap-ansi@^7.0.0
+225 silly packumentCache full:https://registry.npmjs.org/wrap-ansi cache-miss
+226 silly fetch manifest strip-ansi@^6.0.0
+227 silly packumentCache full:https://registry.npmjs.org/strip-ansi cache-miss
+228 silly fetch manifest strip-ansi@^6.0.1
+229 silly packumentCache full:https://registry.npmjs.org/strip-ansi cache-miss
+230 silly fetch manifest emoji-regex@^8.0.0
+231 silly packumentCache full:https://registry.npmjs.org/emoji-regex cache-miss
+232 silly fetch manifest is-fullwidth-code-point@^3.0.0
+233 silly packumentCache full:https://registry.npmjs.org/is-fullwidth-code-point cache-miss
+234 http cache https://registry.npmjs.org/emoji-regex 8ms (cache hit)
+235 silly packumentCache full:https://registry.npmjs.org/emoji-regex set size:89064 disposed:false
+236 http fetch GET 200 https://registry.npmjs.org/strip-ansi 37ms (cache miss)
+237 silly packumentCache full:https://registry.npmjs.org/strip-ansi set size:undefined disposed:false
+238 http fetch GET 200 https://registry.npmjs.org/strip-ansi 39ms (cache miss)
+239 silly packumentCache full:https://registry.npmjs.org/strip-ansi set size:undefined disposed:false
+240 http fetch GET 200 https://registry.npmjs.org/wrap-ansi 40ms (cache miss)
+241 silly packumentCache full:https://registry.npmjs.org/wrap-ansi set size:undefined disposed:false
+242 http fetch GET 200 https://registry.npmjs.org/is-fullwidth-code-point 41ms (cache miss)
+243 silly packumentCache full:https://registry.npmjs.org/is-fullwidth-code-point set size:undefined disposed:false
+244 silly placeDep ROOT strip-ansi@6.0.1 OK for: cliui@7.0.4 want: ^6.0.0
+245 silly placeDep ROOT wrap-ansi@7.0.0 OK for: cliui@7.0.4 want: ^7.0.0
+246 silly fetch manifest ansi-regex@^5.0.1
+247 silly packumentCache full:https://registry.npmjs.org/ansi-regex cache-miss
+248 http fetch GET 200 https://registry.npmjs.org/ansi-regex 39ms (cache miss)
+249 silly packumentCache full:https://registry.npmjs.org/ansi-regex set size:undefined disposed:false
+250 silly placeDep node_modules/string-width emoji-regex@8.0.0 OK for: string-width@4.2.3 want: ^8.0.0
+251 silly placeDep ROOT is-fullwidth-code-point@3.0.0 OK for: string-width@4.2.3 want: ^3.0.0
+252 silly placeDep ROOT ansi-regex@5.0.1 OK for: strip-ansi@6.0.1 want: ^5.0.1
+253 silly placeDep ROOT sprintf-js@1.0.3 OK for: argparse@1.0.10 want: ~1.0.2
+254 silly reify moves {}
+255 http cache sprintf-js@https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz 0ms (cache hit)
+256 http cache is-fullwidth-code-point@https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz 1ms (cache hit)
+257 http cache wrap-ansi@https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz 0ms (cache hit)
+258 http cache ansi-regex@https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz 1ms (cache hit)
+259 http cache strip-ansi@https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz 0ms (cache hit)
+260 http cache y18n@https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz 0ms (cache hit)
+261 http cache yargs-parser@https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz 1ms (cache hit)
+262 http cache require-directory@https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz 0ms (cache hit)
+263 http cache string-width@https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz 0ms (cache hit)
+264 http cache cliui@https://registry.npmjs.org/cliui/-/cliui-7.0.4.tgz 0ms (cache hit)
+265 http cache get-caller-file@https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz 0ms (cache hit)
+266 http cache webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 0ms (cache hit)
+267 http cache safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 0ms (cache hit)
+268 http cache mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz 0ms (cache hit)
+269 http cache mime-types@https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz 0ms (cache hit)
+270 http cache whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 0ms (cache hit)
+271 http cache delayed-stream@https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz 0ms (cache hit)
+272 http cache combined-stream@https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz 0ms (cache hit)
+273 http cache asynckit@https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz 0ms (cache hit)
+274 http cache string_decoder@https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz 0ms (cache hit)
+275 http cache form-data@https://registry.npmjs.org/form-data/-/form-data-4.0.5.tgz 0ms (cache hit)
+276 http cache @types/node-fetch@https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.13.tgz 0ms (cache hit)
+277 http cache @webgpu/types@https://registry.npmjs.org/@webgpu/types/-/types-0.1.38.tgz 0ms (cache hit)
+278 http cache tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 0ms (cache hit)
+279 http cache @types/long@https://registry.npmjs.org/@types/long/-/long-4.0.2.tgz 0ms (cache hit)
+280 http cache long@https://registry.npmjs.org/long/-/long-4.0.0.tgz 0ms (cache hit)
+281 http cache @types/seedrandom@https://registry.npmjs.org/@types/seedrandom/-/seedrandom-2.4.34.tgz 0ms (cache hit)
+282 http cache @tensorflow/tfjs-layers@https://registry.npmjs.org/@tensorflow/tfjs-layers/-/tfjs-layers-4.22.0.tgz 0ms (cache hit)
+283 http cache node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.13.tgz 0ms (cache hit)
+284 http cache yargs@https://registry.npmjs.org/yargs/-/yargs-16.2.0.tgz 0ms (cache hit)
+285 http cache core-js@https://registry.npmjs.org/core-js/-/core-js-3.29.1.tgz 0ms (cache hit)
+286 http cache regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 0ms (cache hit)
+287 http cache @types/offscreencanvas@https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.3.0.tgz 0ms (cache hit)
+288 http cache seedrandom@https://registry.npmjs.org/seedrandom/-/seedrandom-3.0.5.tgz 0ms (cache hit)
+289 http cache @tensorflow/tfjs-data@https://registry.npmjs.org/@tensorflow/tfjs-data/-/tfjs-data-4.22.0.tgz 0ms (cache hit)
+290 http cache @tensorflow/tfjs-backend-webgl@https://registry.npmjs.org/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-4.22.0.tgz 0ms (cache hit)
+291 http cache @tensorflow/tfjs-core@https://registry.npmjs.org/@tensorflow/tfjs-core/-/tfjs-core-4.22.0.tgz 0ms (cache hit)
+292 http cache @vladmandic/face-api@https://registry.npmjs.org/@vladmandic/face-api/-/face-api-1.7.15.tgz 0ms (cache hit)
+293 http cache emoji-regex@https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz 0ms (cache hit)
+294 http cache @tensorflow/tfjs@https://registry.npmjs.org/@tensorflow/tfjs/-/tfjs-4.22.0.tgz 0ms (cache hit)
+295 http cache @tensorflow/tfjs-backend-cpu@https://registry.npmjs.org/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-4.22.0.tgz 0ms (cache hit)
+296 silly tarball no local data for sprintf-js@https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz. Extracting by manifest.
+297 silly tarball no local data for is-fullwidth-code-point@https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz. Extracting by manifest.
+298 silly tarball no local data for wrap-ansi@https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz. Extracting by manifest.
+299 http cache @types/offscreencanvas@https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.7.3.tgz 0ms (cache hit)
+300 silly tarball no local data for ansi-regex@https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz. Extracting by manifest.
+301 silly tarball no local data for strip-ansi@https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz. Extracting by manifest.
+302 silly tarball no local data for y18n@https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz. Extracting by manifest.
+303 silly tarball no local data for yargs-parser@https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz. Extracting by manifest.
+304 silly tarball no local data for require-directory@https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz. Extracting by manifest.
+305 silly tarball no local data for string-width@https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz. Extracting by manifest.
+306 silly tarball no local data for cliui@https://registry.npmjs.org/cliui/-/cliui-7.0.4.tgz. Extracting by manifest.
+307 silly tarball no local data for get-caller-file@https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz. Extracting by manifest.
+308 silly tarball no local data for webidl-conversions@https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz. Extracting by manifest.
+309 http cache argparse@https://registry.npmjs.org/argparse/-/argparse-1.0.10.tgz 0ms (cache hit)
+310 silly tarball no local data for safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz. Extracting by manifest.
+311 silly tarball no local data for mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz. Extracting by manifest.
+312 silly tarball no local data for mime-types@https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz. Extracting by manifest.
+313 silly tarball no local data for whatwg-url@https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz. Extracting by manifest.
+314 silly tarball no local data for delayed-stream@https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz. Extracting by manifest.
+315 silly tarball no local data for combined-stream@https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz. Extracting by manifest.
+316 silly tarball no local data for asynckit@https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz. Extracting by manifest.
+317 silly tarball no local data for string_decoder@https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz. Extracting by manifest.
+318 http cache @tensorflow/tfjs-converter@https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-4.22.0.tgz 0ms (cache hit)
+319 silly tarball no local data for form-data@https://registry.npmjs.org/form-data/-/form-data-4.0.5.tgz. Extracting by manifest.
+320 silly tarball no local data for @types/node-fetch@https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.13.tgz. Extracting by manifest.
+321 silly tarball no local data for @webgpu/types@https://registry.npmjs.org/@webgpu/types/-/types-0.1.38.tgz. Extracting by manifest.
+322 silly tarball no local data for tr46@https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz. Extracting by manifest.
+323 silly tarball no local data for @types/long@https://registry.npmjs.org/@types/long/-/long-4.0.2.tgz. Extracting by manifest.
+324 silly tarball no local data for long@https://registry.npmjs.org/long/-/long-4.0.0.tgz. Extracting by manifest.
+325 silly tarball no local data for @types/seedrandom@https://registry.npmjs.org/@types/seedrandom/-/seedrandom-2.4.34.tgz. Extracting by manifest.
+326 silly tarball no local data for @tensorflow/tfjs-layers@https://registry.npmjs.org/@tensorflow/tfjs-layers/-/tfjs-layers-4.22.0.tgz. Extracting by manifest.
+327 silly tarball no local data for node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.13.tgz. Extracting by manifest.
+328 silly tarball no local data for yargs@https://registry.npmjs.org/yargs/-/yargs-16.2.0.tgz. Extracting by manifest.
+329 silly tarball no local data for core-js@https://registry.npmjs.org/core-js/-/core-js-3.29.1.tgz. Extracting by manifest.
+330 silly tarball no local data for regenerator-runtime@https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz. Extracting by manifest.
+331 silly tarball no local data for @types/offscreencanvas@https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.3.0.tgz. Extracting by manifest.
+332 silly tarball no local data for seedrandom@https://registry.npmjs.org/seedrandom/-/seedrandom-3.0.5.tgz. Extracting by manifest.
+333 silly tarball no local data for @tensorflow/tfjs-data@https://registry.npmjs.org/@tensorflow/tfjs-data/-/tfjs-data-4.22.0.tgz. Extracting by manifest.
+334 silly tarball no local data for @tensorflow/tfjs-backend-webgl@https://registry.npmjs.org/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-4.22.0.tgz. Extracting by manifest.
+335 silly tarball no local data for @tensorflow/tfjs-core@https://registry.npmjs.org/@tensorflow/tfjs-core/-/tfjs-core-4.22.0.tgz. Extracting by manifest.
+336 silly tarball no local data for @vladmandic/face-api@https://registry.npmjs.org/@vladmandic/face-api/-/face-api-1.7.15.tgz. Extracting by manifest.
+337 silly tarball no local data for emoji-regex@https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz. Extracting by manifest.
+338 silly tarball no local data for @tensorflow/tfjs@https://registry.npmjs.org/@tensorflow/tfjs/-/tfjs-4.22.0.tgz. Extracting by manifest.
+339 silly tarball no local data for @tensorflow/tfjs-backend-cpu@https://registry.npmjs.org/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-4.22.0.tgz. Extracting by manifest.
+340 silly tarball no local data for @types/offscreencanvas@https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.7.3.tgz. Extracting by manifest.
+341 silly tarball no local data for argparse@https://registry.npmjs.org/argparse/-/argparse-1.0.10.tgz. Extracting by manifest.
+342 silly tarball no local data for @tensorflow/tfjs-converter@https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-4.22.0.tgz. Extracting by manifest.
+343 http fetch GET 200 https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz 204ms (cache miss)
+344 http fetch GET 200 https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz 202ms (cache miss)
+345 http fetch GET 200 https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz 204ms (cache miss)
+346 http fetch GET 200 https://registry.npmjs.org/string-width/-/string-width-4.2.3.tgz 206ms (cache miss)
+347 http fetch GET 200 https://registry.npmjs.org/cliui/-/cliui-7.0.4.tgz 213ms (cache miss)
+348 http fetch GET 200 https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz 219ms (cache miss)
+349 http fetch GET 200 https://registry.npmjs.org/combined-stream/-/combined-stream-1.0.8.tgz 214ms (cache miss)
+350 http fetch GET 200 https://registry.npmjs.org/delayed-stream/-/delayed-stream-1.0.0.tgz 214ms (cache miss)
+351 http fetch GET 200 https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz 216ms (cache miss)
+352 http fetch GET 200 https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz 223ms (cache miss)
+353 http fetch GET 200 https://registry.npmjs.org/@types/long/-/long-4.0.2.tgz 227ms (cache miss)
+354 http fetch GET 200 https://registry.npmjs.org/@types/node-fetch/-/node-fetch-2.6.13.tgz 241ms (cache miss)
+355 http fetch GET 200 https://registry.npmjs.org/@types/seedrandom/-/seedrandom-2.4.34.tgz 246ms (cache miss)
+356 http fetch GET 200 https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz 250ms (cache miss)
+357 http fetch GET 200 https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz 265ms (cache miss)
+358 http fetch GET 200 https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz 267ms (cache miss)
+359 http fetch GET 200 https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz 264ms (cache miss)
+360 http fetch GET 200 https://registry.npmjs.org/mime-types/-/mime-types-2.1.35.tgz 286ms (cache miss)
+361 http fetch GET 200 https://registry.npmjs.org/form-data/-/form-data-4.0.5.tgz 290ms (cache miss)
+362 http fetch GET 200 https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 297ms (cache miss)
+363 http fetch GET 200 https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz 307ms (cache miss)
+364 http fetch GET 200 https://registry.npmjs.org/y18n/-/y18n-5.0.8.tgz 316ms (cache miss)
+365 http fetch GET 200 https://registry.npmjs.org/long/-/long-4.0.0.tgz 312ms (cache miss)
+366 http fetch GET 200 https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.13.tgz 321ms (cache miss)
+367 http fetch GET 200 https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz 328ms (cache miss)
+368 http fetch GET 200 https://registry.npmjs.org/mime-db/-/mime-db-1.52.0.tgz 340ms (cache miss)
+369 http fetch GET 200 https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz 368ms (cache miss)
+370 http fetch GET 200 https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.7.3.tgz 344ms (cache miss)
+371 http fetch GET 200 https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz 380ms (cache miss)
+372 http fetch GET 200 https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz 379ms (cache miss)
+373 http fetch GET 200 https://registry.npmjs.org/argparse/-/argparse-1.0.10.tgz 461ms (cache miss)
+374 http fetch GET 200 https://registry.npmjs.org/@webgpu/types/-/types-0.1.38.tgz 537ms (cache miss)
+375 http fetch GET 200 https://registry.npmjs.org/@types/offscreencanvas/-/offscreencanvas-2019.3.0.tgz 544ms (cache miss)
+376 http fetch GET 200 https://registry.npmjs.org/seedrandom/-/seedrandom-3.0.5.tgz 569ms (cache miss)
+377 http fetch GET 200 https://registry.npmjs.org/yargs/-/yargs-16.2.0.tgz 609ms (cache miss)
+378 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-data/-/tfjs-data-4.22.0.tgz 2242ms (cache miss)
+379 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-backend-webgl/-/tfjs-backend-webgl-4.22.0.tgz 5314ms (cache miss)
+380 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-backend-cpu/-/tfjs-backend-cpu-4.22.0.tgz 5658ms (cache miss)
+381 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-converter/-/tfjs-converter-4.22.0.tgz 5795ms (cache miss)
+382 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-layers/-/tfjs-layers-4.22.0.tgz 6845ms (cache miss)
+383 http fetch GET 200 https://registry.npmjs.org/core-js/-/core-js-3.29.1.tgz 7617ms (cache miss)
+384 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs-core/-/tfjs-core-4.22.0.tgz 9224ms (cache miss)
+385 http fetch GET 200 https://registry.npmjs.org/@vladmandic/face-api/-/face-api-1.7.15.tgz 9374ms (cache miss)
+386 http fetch GET 200 https://registry.npmjs.org/@tensorflow/tfjs/-/tfjs-4.22.0.tgz 13167ms (cache miss)
+387 silly ADD node_modules/sprintf-js
+388 silly ADD node_modules/ansi-regex
+389 silly ADD node_modules/is-fullwidth-code-point
+390 silly ADD node_modules/wrap-ansi
+391 silly ADD node_modules/strip-ansi
+392 silly ADD node_modules/yargs-parser
+393 silly ADD node_modules/y18n
+394 silly ADD node_modules/string-width
+395 silly ADD node_modules/string-width/node_modules/emoji-regex
+396 silly ADD node_modules/require-directory
+397 silly ADD node_modules/get-caller-file
+398 silly ADD node_modules/cliui
+399 silly ADD node_modules/webidl-conversions
+400 silly ADD node_modules/tr46
+401 silly ADD node_modules/safe-buffer
+402 silly ADD node_modules/whatwg-url
+403 silly ADD node_modules/mime-db
+404 silly ADD node_modules/delayed-stream
+405 silly ADD node_modules/mime-types
+406 silly ADD node_modules/combined-stream
+407 silly ADD node_modules/asynckit
+408 silly ADD node_modules/form-data
+409 silly ADD node_modules/string_decoder
+410 silly ADD node_modules/@types/node-fetch
+411 silly ADD node_modules/node-fetch
+412 silly ADD node_modules/long
+413 silly ADD node_modules/@webgpu/types
+414 silly ADD node_modules/@types/long
+415 silly ADD node_modules/@types/offscreencanvas
+416 silly ADD node_modules/@types/seedrandom
+417 silly ADD node_modules/yargs
+418 silly ADD node_modules/regenerator-runtime
+419 silly ADD node_modules/core-js
+420 silly ADD node_modules/@tensorflow/tfjs-layers
+421 silly ADD node_modules/seedrandom
+422 silly ADD node_modules/@tensorflow/tfjs-data
+423 silly ADD node_modules/@tensorflow/tfjs-converter
+424 silly ADD node_modules/@tensorflow/tfjs-backend-webgl
+425 silly ADD node_modules/@tensorflow/tfjs-core
+426 silly ADD node_modules/@tensorflow/tfjs-core/node_modules/@types/offscreencanvas
+427 silly ADD node_modules/@tensorflow/tfjs-backend-cpu
+428 silly ADD node_modules/@vladmandic/face-api
+429 silly ADD node_modules/@tensorflow/tfjs
+430 silly ADD node_modules/@tensorflow/tfjs/node_modules/argparse
+431 verbose cwd C:\Users\USER\Desktop\evo\web
+432 verbose os Windows_NT 10.0.26200
+433 verbose node v24.15.0
+434 verbose npm  v11.12.1
+435 verbose exit 0
+436 info ok

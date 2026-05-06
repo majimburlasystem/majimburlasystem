@@ -1,0 +1,335 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v24.15.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\USER\Desktop\evo\web\.npmrc
+5 silly config load:file:C:\Users\USER\.npmrc
+6 silly config load:file:C:\Users\USER\Desktop\evo\.appdata\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--no-audit" "--no-fund" "--ignore-scripts"
+9 verbose logfile logs-max:10 dir:C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T13_10_41_848Z-
+10 verbose logfile C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T13_10_41_848Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 silly idealTree buildDeps
+14 silly reify mark retired [
+14 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite'
+14 silly reify ]
+15 silly reify mark retired [
+15 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite-socket',
+15 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server',
+15 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server.cmd',
+15 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server.ps1'
+15 silly reify ]
+16 silly reify mark retired [
+16 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite-tools'
+16 silly reify ]
+17 silly reify mark retired [
+17 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@hono\\node-server'
+17 silly reify ]
+18 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@kurkle\\color' ]
+19 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\client' ]
+20 silly reify mark retired [
+20 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\client-runtime-utils'
+20 silly reify ]
+21 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\config' ]
+22 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\debug' ]
+23 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\dev' ]
+24 silly reify mark retired [
+24 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\engines'
+24 silly reify ]
+25 silly reify mark retired [
+25 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\engines-version'
+25 silly reify ]
+26 silly reify mark retired [
+26 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\fetch-engine'
+26 silly reify ]
+27 silly reify mark retired [
+27 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\get-platform'
+27 silly reify ]
+28 silly reify mark retired [
+28 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\query-plan-executor'
+28 silly reify ]
+29 silly reify mark retired [
+29 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\streams-local'
+29 silly reify ]
+30 silly reify mark retired [
+30 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\studio-core'
+30 silly reify ]
+31 silly reify mark retired [
+31 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\primitive'
+31 silly reify ]
+32 silly reify mark retired [
+32 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-compose-refs'
+32 silly reify ]
+33 silly reify mark retired [
+33 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-primitive'
+33 silly reify ]
+34 silly reify mark retired [
+34 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-slot'
+34 silly reify ]
+35 silly reify mark retired [
+35 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-toggle'
+35 silly reify ]
+36 silly reify mark retired [
+36 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-controllable-state'
+36 silly reify ]
+37 silly reify mark retired [
+37 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-effect-event'
+37 silly reify ]
+38 silly reify mark retired [
+38 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-layout-effect'
+38 silly reify ]
+39 silly reify mark retired [
+39 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@standard-schema\\spec'
+39 silly reify ]
+40 silly reify mark retired [
+40 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\aws-ssl-profiles'
+40 silly reify ]
+41 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\better-result' ]
+42 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\c12' ]
+43 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\chart.js' ]
+44 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\chokidar' ]
+45 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\confbox' ]
+46 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\deepmerge-ts' ]
+47 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\defu' ]
+48 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\denque' ]
+49 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\destr' ]
+50 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\dotenv' ]
+51 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\effect' ]
+52 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\empathic' ]
+53 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\env-paths' ]
+54 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\exsolve' ]
+55 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\fast-check' ]
+56 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\fast-uri' ]
+57 silly reify mark retired [
+57 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\foreground-child'
+57 silly reify ]
+58 silly reify mark retired [
+58 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\generate-function'
+58 silly reify ]
+59 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\get-port-please' ]
+60 silly reify mark retired [
+60 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\giget',
+60 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget',
+60 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget.cmd',
+60 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget.ps1'
+60 silly reify ]
+61 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\grammex' ]
+62 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\graphmatch' ]
+63 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\hono' ]
+64 silly reify mark retired [
+64 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\http-status-codes'
+64 silly reify ]
+65 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\iconv-lite' ]
+66 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\is-property' ]
+67 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\lru.min' ]
+68 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\mysql2' ]
+69 silly reify mark retired [
+69 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\named-placeholders'
+69 silly reify ]
+70 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\ohash' ]
+71 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pathe' ]
+72 silly reify mark retired [
+72 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\perfect-debounce'
+72 silly reify ]
+73 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pkg-types' ]
+74 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\postgres' ]
+75 silly reify mark retired [
+75 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\prisma',
+75 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma',
+75 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma.cmd',
+75 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma.ps1'
+75 silly reify ]
+76 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\proper-lockfile' ]
+77 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pure-rand' ]
+78 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\rc9' ]
+79 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\readdirp' ]
+80 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\remeda' ]
+81 silly reify mark retired [
+81 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\require-from-string'
+81 silly reify ]
+82 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\retry' ]
+83 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\safer-buffer' ]
+84 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\seq-queue' ]
+85 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\signal-exit' ]
+86 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\sqlstring' ]
+87 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\std-env' ]
+88 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\valibot' ]
+89 silly reify mark retired [ 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\zeptomatch' ]
+90 silly reify moves {
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\.pglite-qMpn7u1f',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite-socket': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\.pglite-socket-LhXAtF4P',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.pglite-server-vW3AulkY',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server.cmd': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.pglite-server.cmd-kwoesnbE',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\pglite-server.ps1': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.pglite-server.ps1-JVUSCFtP',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\pglite-tools': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@electric-sql\\.pglite-tools-jGMoNAQ8',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@hono\\node-server': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@hono\\.node-server-iWZHGcW3',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@kurkle\\color': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@kurkle\\.color-LobyszdC',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\client': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.client-4aPs5fqv',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\client-runtime-utils': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.client-runtime-utils-ykUZg0ac',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\config': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.config-GRPOZPDB',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\debug': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.debug-U9TcdiSM',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\dev': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.dev-WtVstXzW',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\engines': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.engines-O7mwaQj9',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\engines-version': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.engines-version-deoHSIf9',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\fetch-engine': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.fetch-engine-fiZid9gg',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\get-platform': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.get-platform-CKtznU1C',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\query-plan-executor': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.query-plan-executor-5CJNyB7V',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\streams-local': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.streams-local-1Z8KWXmI',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\studio-core': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@prisma\\.studio-core-29wq4SLz',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\primitive': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.primitive-Acslr5Q0',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-compose-refs': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-compose-refs-asPnIhbz',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-primitive': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-primitive-vZNvQqqW',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-slot': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-slot-B7j0XeRl',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-toggle': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-toggle-5gDMeIzc',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-controllable-state': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-use-controllable-state-XH0Lstct',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-effect-event': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-use-effect-event-JjM3bfjg',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\react-use-layout-effect': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@radix-ui\\.react-use-layout-effect-qbzIFvka',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@standard-schema\\spec': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\@standard-schema\\.spec-uNBlwcFK',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\aws-ssl-profiles': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.aws-ssl-profiles-1Ov5PzFb',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\better-result': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.better-result-pzK5rhpX',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\c12': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.c12-kNNYVYWD',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\chart.js': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.chart.js-D87fGlgk',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\chokidar': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.chokidar-7EKFgCfC',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\confbox': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.confbox-TlZM9Thw',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\deepmerge-ts': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.deepmerge-ts-0fCDzUPe',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\defu': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.defu-FuNZMArl',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\denque': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.denque-VSa3bfMF',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\destr': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.destr-aCaUyQ11',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\dotenv': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.dotenv-Jf8Gy66m',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\effect': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.effect-DoCiQtiH',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\empathic': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.empathic-Kz3Rd4tE',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\env-paths': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.env-paths-CmrveJJA',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\exsolve': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.exsolve-J1rZmtlO',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\fast-check': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.fast-check-lLIZgxg6',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\fast-uri': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.fast-uri-JOpuhRQe',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\foreground-child': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.foreground-child-YdlGMJMR',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\generate-function': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.generate-function-2cyVxtlg',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\get-port-please': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.get-port-please-kq7elvQK',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\giget': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.giget-lt83i3We',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.giget-dxz5ssQQ',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget.cmd': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.giget.cmd-Hu6GXpwr',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\giget.ps1': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.giget.ps1-kgUfX9Gb',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\grammex': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.grammex-HdyCVkpa',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\graphmatch': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.graphmatch-f52nC5Zt',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\hono': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.hono-GsCXzUFR',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\http-status-codes': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.http-status-codes-37jZAqL1',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\iconv-lite': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.iconv-lite-gili8g7g',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\is-property': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.is-property-t4ZZIRzQ',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\lru.min': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.lru.min-D6IUQjYQ',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\mysql2': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.mysql2-wjL8R1Kp',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\named-placeholders': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.named-placeholders-86rn68uE',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\ohash': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.ohash-sB14q7ll',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pathe': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.pathe-MvkrGqhq',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\perfect-debounce': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.perfect-debounce-vNm6meVK',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pkg-types': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.pkg-types-SmWfcFbJ',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\postgres': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.postgres-yHoK3dKp',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\prisma': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.prisma-0W0tqu61',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.prisma-BkLddLCr',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma.cmd': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.prisma.cmd-4oj5OnVz',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\prisma.ps1': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.prisma.ps1-uc9IIAmw',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\proper-lockfile': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.proper-lockfile-nOCPYDFU',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\pure-rand': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.pure-rand-bm6FOrtf',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\rc9': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.rc9-xUvjB3TM',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\readdirp': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.readdirp-S9pgNzpM',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\remeda': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.remeda-P5Eas7Jg',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\require-from-string': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.require-from-string-xEP7Uc84',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\retry': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.retry-odyTj5Hn',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\safer-buffer': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.safer-buffer-uGUWOdZs',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\seq-queue': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.seq-queue-sJiEv7hS',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\signal-exit': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.signal-exit-R4MTGzJl',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\sqlstring': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.sqlstring-fyYH3CAM',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\std-env': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.std-env-4RIptQxc',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\valibot': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.valibot-TP7dUvm7',
+90 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\zeptomatch': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.zeptomatch-LLv29FJk'
+90 silly reify }
+91 silly REMOVE node_modules/zeptomatch
+92 silly REMOVE node_modules/valibot
+93 silly REMOVE node_modules/std-env
+94 silly REMOVE node_modules/sqlstring
+95 silly REMOVE node_modules/signal-exit
+96 silly REMOVE node_modules/seq-queue
+97 silly REMOVE node_modules/safer-buffer
+98 silly REMOVE node_modules/retry
+99 silly REMOVE node_modules/require-from-string
+100 silly REMOVE node_modules/remeda
+101 silly REMOVE node_modules/readdirp
+102 silly REMOVE node_modules/rc9
+103 silly REMOVE node_modules/pure-rand
+104 silly REMOVE node_modules/proper-lockfile
+105 silly REMOVE node_modules/proper-lockfile/node_modules/signal-exit
+106 silly REMOVE node_modules/prisma
+107 silly REMOVE node_modules/postgres
+108 silly REMOVE node_modules/pkg-types
+109 silly REMOVE node_modules/perfect-debounce
+110 silly REMOVE node_modules/pathe
+111 silly REMOVE node_modules/ohash
+112 silly REMOVE node_modules/named-placeholders
+113 silly REMOVE node_modules/mysql2
+114 silly REMOVE node_modules/mysql2/node_modules/long
+115 silly REMOVE node_modules/lru.min
+116 silly REMOVE node_modules/is-property
+117 silly REMOVE node_modules/iconv-lite
+118 silly REMOVE node_modules/http-status-codes
+119 silly REMOVE node_modules/hono
+120 silly REMOVE node_modules/graphmatch
+121 silly REMOVE node_modules/grammex
+122 silly REMOVE node_modules/giget
+123 silly REMOVE node_modules/get-port-please
+124 silly REMOVE node_modules/generate-function
+125 silly REMOVE node_modules/foreground-child
+126 silly REMOVE node_modules/fast-uri
+127 silly REMOVE node_modules/fast-check
+128 silly REMOVE node_modules/exsolve
+129 silly REMOVE node_modules/env-paths
+130 silly REMOVE node_modules/empathic
+131 silly REMOVE node_modules/effect
+132 silly REMOVE node_modules/dotenv
+133 silly REMOVE node_modules/destr
+134 silly REMOVE node_modules/denque
+135 silly REMOVE node_modules/defu
+136 silly REMOVE node_modules/deepmerge-ts
+137 silly REMOVE node_modules/confbox
+138 silly REMOVE node_modules/chokidar
+139 silly REMOVE node_modules/chart.js
+140 silly REMOVE node_modules/c12
+141 silly REMOVE node_modules/better-result
+142 silly REMOVE node_modules/aws-ssl-profiles
+143 silly REMOVE node_modules/@standard-schema/spec
+144 silly REMOVE node_modules/@radix-ui/react-use-layout-effect
+145 silly REMOVE node_modules/@radix-ui/react-use-effect-event
+146 silly REMOVE node_modules/@radix-ui/react-use-controllable-state
+147 silly REMOVE node_modules/@radix-ui/react-toggle
+148 silly REMOVE node_modules/@radix-ui/react-slot
+149 silly REMOVE node_modules/@radix-ui/react-primitive
+150 silly REMOVE node_modules/@radix-ui/react-compose-refs
+151 silly REMOVE node_modules/@radix-ui/primitive
+152 silly REMOVE node_modules/@prisma/studio-core
+153 silly REMOVE node_modules/@prisma/streams-local
+154 silly REMOVE node_modules/@prisma/streams-local/node_modules/json-schema-traverse
+155 silly REMOVE node_modules/@prisma/streams-local/node_modules/ajv
+156 silly REMOVE node_modules/@prisma/query-plan-executor
+157 silly REMOVE node_modules/@prisma/get-platform
+158 silly REMOVE node_modules/@prisma/get-platform/node_modules/@prisma/debug
+159 silly REMOVE node_modules/@prisma/fetch-engine
+160 silly REMOVE node_modules/@prisma/fetch-engine/node_modules/@prisma/get-platform
+161 silly REMOVE node_modules/@prisma/engines-version
+162 silly REMOVE node_modules/@prisma/engines
+163 silly REMOVE node_modules/@prisma/engines/node_modules/@prisma/get-platform
+164 silly REMOVE node_modules/@prisma/dev
+165 silly REMOVE node_modules/@prisma/debug
+166 silly REMOVE node_modules/@prisma/config
+167 silly REMOVE node_modules/@prisma/client-runtime-utils
+168 silly REMOVE node_modules/@prisma/client
+169 silly REMOVE node_modules/@kurkle/color
+170 silly REMOVE node_modules/@hono/node-server
+171 silly REMOVE node_modules/@electric-sql/pglite-tools
+172 silly REMOVE node_modules/@electric-sql/pglite-socket
+173 silly REMOVE node_modules/@electric-sql/pglite
+174 verbose cwd C:\Users\USER\Desktop\evo\web
+175 verbose os Windows_NT 10.0.26200
+176 verbose node v24.15.0
+177 verbose npm  v11.12.1
+178 verbose exit 0
+179 info ok

@@ -1,0 +1,66 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.12.1
+2 info using node@v24.15.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:C:\Users\USER\Desktop\evo\web\.npmrc
+5 silly config load:file:C:\Users\USER\.npmrc
+6 silly config load:file:C:\Users\USER\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install sql.js zod nanoid
+8 verbose argv "install" "sql.js" "zod" "nanoid" "--no-audit" "--no-fund" "--ignore-scripts"
+9 verbose logfile logs-max:10 dir:C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T12_53_40_392Z-
+10 verbose logfile C:\Users\USER\Desktop\evo\.npm-cache\_logs\2026-05-06T12_53_40_392Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4496293888 maxSize:1124073472 maxEntrySize:562036736
+13 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+14 silly idealTree buildDeps
+15 silly fetch manifest sql.js@*
+16 silly packumentCache full:https://registry.npmjs.org/sql.js cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/sql.js 199ms (cache miss)
+18 silly packumentCache full:https://registry.npmjs.org/sql.js set size:undefined disposed:false
+19 silly fetch manifest zod@*
+20 silly packumentCache full:https://registry.npmjs.org/zod cache-miss
+21 http cache https://registry.npmjs.org/zod 10ms (cache hit)
+22 silly packumentCache full:https://registry.npmjs.org/zod set size:3552562 disposed:false
+23 silly fetch manifest nanoid@*
+24 silly packumentCache full:https://registry.npmjs.org/nanoid cache-miss
+25 http cache https://registry.npmjs.org/nanoid 10ms (cache hit)
+26 silly packumentCache full:https://registry.npmjs.org/nanoid set size:310559 disposed:false
+27 silly placeDep ROOT nanoid@5.1.11 REPLACE for: web@0.1.0 want: *
+28 silly placeDep ROOT sql.js@1.14.1 OK for: web@0.1.0 want: *
+29 silly placeDep ROOT zod@4.4.3 REPLACE for: web@0.1.0 want: *
+30 silly fetch manifest nanoid@^3.3.11
+31 silly packumentCache full:https://registry.npmjs.org/nanoid cache-hit
+32 silly placeDep node_modules/postcss nanoid@3.3.12 OK for: postcss@8.5.14 want: ^3.3.11
+33 silly fetch manifest nanoid@^3.3.6
+34 silly packumentCache full:https://registry.npmjs.org/nanoid cache-hit
+35 silly placeDep node_modules/next nanoid@3.3.12 OK for: postcss@8.4.31 want: ^3.3.6
+36 silly reify mark retired [
+36 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\nanoid',
+36 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid',
+36 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid.cmd',
+36 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid.ps1'
+36 silly reify ]
+37 silly reify moves {
+37 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\nanoid': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.nanoid-SOp3egna',
+37 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.nanoid-KgCeZWg9',
+37 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid.cmd': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.nanoid.cmd-QQJCMLvY',
+37 silly reify   'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\nanoid.ps1': 'C:\\Users\\USER\\Desktop\\evo\\web\\node_modules\\.bin\\.nanoid.ps1-sQNPxYeH'
+37 silly reify }
+38 http cache sql.js@https://registry.npmjs.org/sql.js/-/sql.js-1.14.1.tgz 0ms (cache hit)
+39 http cache nanoid@https://registry.npmjs.org/nanoid/-/nanoid-5.1.11.tgz 0ms (cache hit)
+40 http cache nanoid@https://registry.npmjs.org/nanoid/-/nanoid-3.3.12.tgz 0ms (cache hit)
+41 silly tarball no local data for sql.js@https://registry.npmjs.org/sql.js/-/sql.js-1.14.1.tgz. Extracting by manifest.
+42 http cache nanoid@https://registry.npmjs.org/nanoid/-/nanoid-3.3.12.tgz 0ms (cache hit)
+43 silly tarball no local data for nanoid@https://registry.npmjs.org/nanoid/-/nanoid-5.1.11.tgz. Extracting by manifest.
+44 http fetch GET 200 https://registry.npmjs.org/nanoid/-/nanoid-5.1.11.tgz 84ms (cache miss)
+45 http fetch GET 200 https://registry.npmjs.org/sql.js/-/sql.js-1.14.1.tgz 953ms (cache miss)
+46 silly ADD node_modules/sql.js
+47 silly ADD node_modules/postcss/node_modules/nanoid
+48 silly ADD node_modules/next/node_modules/nanoid
+49 silly CHANGE node_modules/nanoid
+50 verbose cwd C:\Users\USER\Desktop\evo\web
+51 verbose os Windows_NT 10.0.26200
+52 verbose node v24.15.0
+53 verbose npm  v11.12.1
+54 verbose exit 0
+55 info ok
